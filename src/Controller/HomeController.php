@@ -163,7 +163,7 @@ class HomeController extends AbstractController
 
             $this->entityManager->flush();
 
-            $this->addFlash('modification', 'Modification effectuée avec succès');
+            $this->addFlash('success', 'Modification effectuée avec succès');
             return $this->redirectToRoute('singleProfilMissions', ['idUser'=>$idUser]);
         }
 
@@ -185,7 +185,7 @@ class HomeController extends AbstractController
         $item->remove($suppUserMission);
         $item->flush();
 
-        $this->addFlash('suppresion', 'Suppression de la mission effectuée avec succès');
+        $this->addFlash('alert', 'Suppression de la mission effectuée avec succès');
 
         return $this->redirectToRoute('singleProfilMissions', ['idUser'=>$idUser]);
     }
@@ -239,7 +239,7 @@ class HomeController extends AbstractController
             $userModified = $this->entityManager->getRepository(User::class)->findOneBy(["id"=>$idUserModified]);
             $userModified->updateTimestanps();
             $this->entityManager->flush();
-            $this->addFlash('modification', 'Compétence modifiée avec succès');
+            $this->addFlash('success', 'Compétence modifiée avec succès');
             return $this->redirectToRoute('singleProfilSkills', ['idUser'=>$idUser]);
         }
 
@@ -260,7 +260,7 @@ class HomeController extends AbstractController
         $item = $this->getDoctrine()->getManager();
         $item->remove($suppUserSkill);
         $item->flush();
-        $this->addFlash('suppression', 'Suppression dela compétence effectuée avec succès');
+        $this->addFlash('alert', 'Suppression dela compétence effectuée avec succès');
 
         return $this->redirectToRoute('singleProfilSkills', ['idUser'=>$idUser]);
     }

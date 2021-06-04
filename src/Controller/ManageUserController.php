@@ -37,7 +37,7 @@ class ManageUserController extends AbstractController
             $this->entityManager->persist($data);
             $this->entityManager->flush();
 
-            $this->addFlash('creation', 'Le candidat "' . $data->getNom().' '. $data->getPrenom(). '" a bien été créé !');
+            $this->addFlash('alert-info', 'Le candidat "' . $data->getNom().' '. $data->getPrenom(). '" a bien été créé !');
         }
 
         $candidateList= $this->entityManager->getRepository(User::class)->findAll();
@@ -61,7 +61,7 @@ class ManageUserController extends AbstractController
         {
             $modifCandidate->setPassword($passwordEncoder->encodePassword($modifCandidate, $modifCandidate->getPassword()));
             $this->entityManager->flush();
-            $this->addFlash('modification', 'Le candidat a bien été modifié !');
+            $this->addFlash('success', 'Le candidat a bien été modifié !');
             if($modifCandidate->getRoles() === "ROLE_ADMIN" ){
                 return $this->redirectToRoute('manageCandidate');
             } else{
@@ -86,7 +86,7 @@ class ManageUserController extends AbstractController
         $item = $this->getDoctrine()->getManager();
         $item->remove($suppCandidate);
         $item->flush();
-        $this->addFlash('suppression', 'Le candidat "' . $suppCandidate->getNom().' '.$suppCandidate->getPrenom().'" a bien été supprimé !');
+        $this->addFlash('alert', 'Le candidat "' . $suppCandidate->getNom().' '.$suppCandidate->getPrenom().'" a bien été supprimé !');
 
         return $this->redirectToRoute('manageCandidate');
     }
@@ -107,7 +107,7 @@ class ManageUserController extends AbstractController
             $collaborateur->setPassword($passwordEncoder->encodePassword($collaborateur, $collaborateur->getPassword()));
             $this->entityManager->persist($data);
             $this->entityManager->flush();
-            $this->addFlash('creation', 'Le collaborateur "' . $data->getNom().' '. $data->getPrenom(). '" a bien été créé !');
+            $this->addFlash('alert-info', 'Le collaborateur "' . $data->getNom().' '. $data->getPrenom(). '" a bien été créé !');
         }
 
         $collaborateurList= $this->entityManager->getRepository(User::class)->findAll();
@@ -131,7 +131,7 @@ class ManageUserController extends AbstractController
         {
             $modifCollaborateur->setPassword($passwordEncoder->encodePassword($modifCollaborateur, $modifCollaborateur->getPassword()));
             $this->entityManager->flush();
-            $this->addFlash('modification', 'Le collaborateur a bien été modifié !');
+            $this->addFlash('success', 'Le collaborateur a bien été modifié !');
 
             if($modifCollaborateur->getRoles() === "ROLE_ADMIN" ){
                 return $this->redirectToRoute('manageCollaborateur');
@@ -157,7 +157,7 @@ class ManageUserController extends AbstractController
         $item = $this->getDoctrine()->getManager();
         $item->remove($suppCollaborateur);
         $item->flush();
-        $this->addFlash('suppression', 'Le collaborateur "' . $suppCollaborateur->getNom().' '.$suppCollaborateur->getPrenom().'" a bien été supprimé !');
+        $this->addFlash('alert', 'Le collaborateur "' . $suppCollaborateur->getNom().' '.$suppCollaborateur->getPrenom().'" a bien été supprimé !');
 
         return $this->redirectToRoute('manageCollaborateur');
     }

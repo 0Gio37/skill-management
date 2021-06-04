@@ -10,7 +10,7 @@
         {{ form_start(formNewSkill) }}
         {{ form_row(formNewSkill.nom) }}
         {{ form_row(formNewSkill.category) }}
-        <button>Ajouter une compétence</button>
+        <button type="button" class="btn btn-primary">Ajouter une compétence</button>
         {{ form_end(formNewSkill) }}
     </div>
 
@@ -27,6 +27,5 @@
                 {% endif %}
             {% endfor %}
     {% endfor %}
-
 
 {% endblock %}

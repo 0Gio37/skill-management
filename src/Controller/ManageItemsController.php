@@ -38,7 +38,7 @@ class ManageItemsController extends AbstractController
             $this->entityManager->persist($data);
             $this->entityManager->flush();
 
-            $this->addFlash('creation', 'La catégorie "' . $data->getNom().'" a bien été créée !');
+            $this->addFlash('alert-info', 'La catégorie "' . $data->getNom().'" a bien été créée !');
         }
 
         $categoryList = $this->entityManager->getRepository(Category::class)->findAll();
@@ -61,7 +61,7 @@ class ManageItemsController extends AbstractController
         if ($modifCatForm->isSubmitted() && $modifCatForm->isValid())
         {
             $this->entityManager->flush();
-            $this->addFlash('modification', 'La catégorie a bien été modifiée !');
+            $this->addFlash('success', 'La catégorie a bien été modifiée !');
             return $this->redirectToRoute('manageCategory');
         }
 
@@ -80,7 +80,7 @@ class ManageItemsController extends AbstractController
         $item->remove($suppCat);
         $item->flush();
 
-        $this->addFlash('suppression', 'La catégorie "' . $suppCat->getNom().'" a bien été supprimée !');
+        $this->addFlash('alert', 'La catégorie "' . $suppCat->getNom().'" a bien été supprimée !');
 
         return $this->redirectToRoute('manageCategory');
     }
@@ -100,7 +100,7 @@ class ManageItemsController extends AbstractController
             $data = $formNewComp->getData();
             $this->entityManager->persist($data);
             $this->entityManager->flush();
-            $this->addFlash('creation', 'L\'entreprise "' . $data->getNom().'" a bien été créée !');
+            $this->addFlash('alert-info', 'L\'entreprise "' . $data->getNom().'" a bien été créée !');
         }
 
         $companyList = $this->entityManager->getRepository(Company::class)->findAll();
@@ -123,7 +123,7 @@ class ManageItemsController extends AbstractController
         if ($modifCompForm->isSubmitted() && $modifCompForm->isValid())
         {
             $this->entityManager->flush();
-            $this->addFlash('modification', 'L\'entreprise a bien été modifiée !');
+            $this->addFlash('success', 'L\'entreprise a bien été modifiée !');
             return $this->redirectToRoute('manageCompany');
         }
 
@@ -142,7 +142,7 @@ class ManageItemsController extends AbstractController
         $item->remove($suppComp);
         $item->flush();
 
-        $this->addFlash('suppression', 'L\'entreprise ' . $suppComp->getNom().' a bien été supprimée !');
+        $this->addFlash('alert', 'L\'entreprise ' . $suppComp->getNom().' a bien été supprimée !');
 
         return $this->redirectToRoute('manageCompany');
     }
@@ -164,7 +164,7 @@ class ManageItemsController extends AbstractController
             $data = $formNewSkill->getData();
             $this->entityManager->persist($data);
             $this->entityManager->flush();
-            $this->addFlash('creation', 'La compétence "' . $data->getNom().'" a bien été créée !');
+            $this->addFlash('alert-info', 'La compétence "' . $data->getNom().'" a bien été créée !');
         }
 
         $skillList = $this->entityManager->getRepository(Skill::class)->findAll();
@@ -188,7 +188,7 @@ class ManageItemsController extends AbstractController
         if ($modifSkillForm->isSubmitted() && $modifSkillForm->isValid())
         {
             $this->entityManager->flush();
-            $this->addFlash('modification', 'La compétence a bien été modifiée !');
+            $this->addFlash('succes', 'La compétence a bien été modifiée !');
             return $this->redirectToRoute('manageSkill');
         }
 
@@ -206,7 +206,7 @@ class ManageItemsController extends AbstractController
         $item = $this->getDoctrine()->getManager();
         $item->remove($suppSkill);
         $item->flush();
-        $this->addFlash('suppression', 'La compétence "' . $suppSkill->getNom().'" a bien été supprimée !');
+        $this->addFlash('alert', 'La compétence "' . $suppSkill->getNom().'" a bien été supprimée !');
 
         return $this->redirectToRoute('manageSkill');
     }

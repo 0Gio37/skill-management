@@ -23,9 +23,9 @@
     {% if (app.user.roles[0] is same as('ROLE_USER')) or (app.user.roles[0] is same as('ROLE_ADMIN')) %}
         <div>
             {% if oneProfil.profil.nom is same as('Candidat') %}
-                <a href ={{  path('modifCandidate', {idUser:oneProfil.id, idProfil:idProfil}) }}>Modifier les informations</a>
+                <a href ={{  path('modifCandidate', {idUser:oneProfil.id, idProfil:idProfil}) }}><button type="button" class="btn btn-outline-primary">Modifier les informations</button></a>
             {% else %}
-                <a href ={{  path('modifCollaborateur', {idUser:oneProfil.id, idProfil:idProfil}) }}>Modifier les informations</a>
+                <a href ={{  path('modifCollaborateur', {idUser:oneProfil.id, idProfil:idProfil}) }}><button type="button" class="btn btn-outline-primary">Modifier les informations</button></a>
             {% endif %}
         </div>
     {% endif %}
