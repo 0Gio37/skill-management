@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List Skills{% endblock %}
+
+{% block body %}
+
+    <h1>LISTE DES COMPETENCES de {{ user.prenom }} {{ user.nom | upper }}</h1>
+
+    <p><a href={{ path('singleProfil', {idUser: user.id,idProfil:user.profil.id}) }}>Retour au Profil</a></p>
+
+    <h2>Ajouter une compétence</h2>
+    <div>
+        {{ form_start(addSkillUserForm) }}
+        {{ form_row(addSkillUserForm.skill) }}
+        {{ form_row(addSkillUserForm.expertise) }}
+        {{ form_row(addSkillUserForm.prefer) }}
+        <button>Ajouter</button>
+        {{ form_end(addSkillUserForm) }}
+    </div>
+
+
+    {% for cat in listCategory %}
+        <ul>
+            <p>{{ cat.nom | upper }}</p>
+            {% for competence in  skillId  %}
+                {% for comp in listSkill %}
+                    {% if comp.id is same as(competence.skill.id) %}
+                        {% if cat.id is same as(comp.category.id) %}
+                            <li>{{ comp.nom }}</li>
+                            <li>Niveau : {{ competence.expertise.niveau }}</li>
+                            {% if competence.prefer == true %}
+                            <li>Favori : Oui</li>
+                            {% else %}
+                            <li>Favori : Non</li>
+                                {% endif %}
+                            <li><a href= {{ path('singleProfilSkillModification', {idLienUserSkill : competence.id, idUser: user.id})  }}>Modifier</a></li>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li><a href= {{ path('singleProfilSkillDelete', {idLienUserSkill : competence.id, idUser: user.id})  }}>Supprimer</a></li>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    {% endfor %}
+
+
+
+
+
+
+{% endblock %}
+
+

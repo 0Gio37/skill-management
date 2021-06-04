@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List Missions{% endblock %}
+
+
+{% block body %}
+
+    <h1>LISTE DES MISSIONS de {{ user.prenom }} {{ user.nom | upper }} </h1>
+
+    <p><a href={{ path('singleProfil', {idUser: user.id,idProfil:user.profil.id}) }}>Retour au Profil</a></p>
+
+
+    <h2>Ajouter une mission</h2>
+    <div>
+        {{ form_start(addMissionlUserForm) }}
+        {{ form_row(addMissionlUserForm.company) }}
+        {{ form_row(addMissionlUserForm.descirptif) }}
+        {{ form_row(addMissionlUserForm.debut) }}
+        {{ form_row(addMissionlUserForm.fin) }}
+        {{ form_row(addMissionlUserForm.en_cours) }}
+        <button>Ajouter</button>
+        {{ form_end(addMissionlUserForm) }}
+    </div>
+
+    {% for mission in  missionProfil  %}
+    <ul>
+        <li>DU {{ mission.debut | format_date(locale='fr', pattern=" dd MMMM YYYY") }}</li>
+        <li>AU {{ mission.fin | format_date(locale='fr', pattern=" dd MMMM YYYY") }}</li>
+        {% for ent in listEntreprise %}
+            {% if ent.id is same as(mission.company.id) %}
+                <li>ENTREPRISE : {{ ent.nom }}</li>
+                <li>LIEU : {{ ent.lieu }}</li>
+            {% endif %}
+        {% endfor%}
+        <li>MISSION : {{ mission.descirptif }}</li>
+        <li><a href= {{ path('singleProfilMissionModification', {idMission: mission.id, idUser: user.id})  }}>Modifier</a></li>
+        {% if is_granted('ROLE_ADMIN') %}
+            <li><a href= {{ path('singleProfilMissionDelete', {idMission : mission.id, idUser: user.id})  }}>Supprimer</a></li>
+        {% endif %}
+    </ul>
+
+
+    {% endfor %}
+
+
+
+
+{% endblock %}

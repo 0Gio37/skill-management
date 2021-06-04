@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification User Mission{% endblock %}
+
+{% block body %}
+
+    <h1>MODIFIER UNE MISSION</h1>
+
+    <a href ={{  path('singleProfilMissions', {idUser:idUser,idProfil:modifUserMission.user.profil.id}) }}>Retour aux missions</a>
+
+    {{ form_start(modifUserMissionForm) }}
+    {{ form_row(modifUserMissionForm.company) }}
+    {{ form_row(modifUserMissionForm.descirptif) }}
+    {{ form_row(modifUserMissionForm.debut) }}
+    {{ form_row(modifUserMissionForm.fin) }}
+    {{ form_row(modifUserMissionForm.en_cours) }}
+    <button>Modifier</button>
+    {{ form_end(modifUserMissionForm) }}
+
+{% endblock %}
+
+

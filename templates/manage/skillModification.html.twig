@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Skills Management{% endblock %}
+
+{% block body %}
+
+    <h1>GESTION DES COMPETENCES</h1>
+
+    <h2>Renseigner la ou les nouvelles valeurs</h2>
+
+    {{ form_start(modifSkillForm) }}
+    {{ form_row(modifSkillForm.nom) }}
+    {{ form_row(modifSkillForm.category) }}
+    <button>Modifier</button>
+    {{ form_end(modifSkillForm) }}
+
+    <a href= {{ path('manageSkill')  }}><button>Annuler</button></a>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Candidate Management{% endblock %}
+
+{% block body %}
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <h1>GESTION DES CANDIDATS</h1>
+        <h2>Renseigner les modifications</h2>
+    {% else %}
+        <h1>MODIFIER VOS DONNÉES PERSONNELLES</h1>
+    {% endif %}
+
+
+    <div>
+        {{ form_start(modifCandidateForm) }}
+        <div>
+            {{ form_row(modifCandidateForm.nom) }}
+            {{ form_row(modifCandidateForm.prenom) }}
+            {% if is_granted('ROLE_ADMIN') %}
+                {{ form_row(modifCandidateForm.email) }}
+                {{ form_row(modifCandidateForm.password) }}
+            {% endif %}
+        </div>
+        <div>
+            {{ form_row(modifCandidateForm.adresse) }}
+            {{ form_row(modifCandidateForm.cp) }}
+            {{ form_row(modifCandidateForm.ville) }}
+            {{ form_row(modifCandidateForm.telephone) }}
+        </div>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div>
+                {{ form_row(modifCandidateForm.etat) }}
+                {{ form_row(modifCandidateForm.profil) }}
+                {{ form_row(modifCandidateForm.roles) }}
+            </div>
+        {% endif %}
+        <button>Modifier</button>
+        {{ form_end(modifCandidateForm) }}
+    </div>
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href= {{ path('manageCandidate')  }}><button>Annuler</button></a>
+    {% else %}
+        <a href ={{  path('singleProfil', {idProfil:currentIdProfil, idUser:currentId}) }}><button>Annuler</button></a>
+    {% endif %}
+
+{% endblock %}

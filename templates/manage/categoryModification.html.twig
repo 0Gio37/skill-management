@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Category Management{% endblock %}
+
+{% block body %}
+
+    <h1>GESTION DES CATEGORIES</h1>
+
+    <h2>Renseigner la nouvelle valeur</h2>
+
+    {{ form_start(modifCatForm) }}
+    {{ form_row(modifCatForm.nom) }}
+    <button>Modifier</button>
+    {{ form_end(modifCatForm) }}
+
+    <a href= {{ path('manageCategory')  }}><button>Annuler</button></a>
+
+{% endblock %}

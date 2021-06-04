@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List Company{% endblock %}
+
+{% block body %}
+
+    <h1>GESTION DES ENTREPRISES</h1>
+
+    <div>
+        {{ form_start(formNewComp) }}
+        {{ form_row(formNewComp.nom) }}
+        {{ form_row(formNewComp.lieu) }}
+        <button>Ajouter une entreprise</button>
+        {{ form_end(formNewComp) }}
+    </div>
+
+
+    <h2>Liste des entreprises</h2>
+    {% for comp in  companyList %}
+    <ul>
+        <li>{{ comp.nom | upper }}</li>
+        <li>{{ comp.lieu }}</li>
+        <li><a href= {{ path('modifCompany', {idUser : comp.id})  }}>Modifier</a></li>
+        <li><a href= {{ path('suppCompany', {idUser : comp.id})  }}>Supprimer</a></li>
+    </ul>
+    {% endfor %}
+
+
+{% endblock %}

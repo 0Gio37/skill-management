@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List Collaborateur{% endblock %}
+
+{% block body %}
+
+
+    <h1>GESTION DES COLLABORATEURS</h1>
+
+    <h2>Ajouter un collaborateur</h2>
+    <div>
+        {{ form_start(formNewCollaborateur) }}
+        <div>
+            {{ form_row(formNewCollaborateur.nom) }}
+            {{ form_row(formNewCollaborateur.prenom) }}
+            {{ form_row(formNewCollaborateur.email) }}
+            {{ form_row(formNewCollaborateur.password) }}
+        </div>
+        <div>
+            {{ form_row(formNewCollaborateur.adresse) }}
+            {{ form_row(formNewCollaborateur.cp) }}
+            {{ form_row(formNewCollaborateur.ville) }}
+            {{ form_row(formNewCollaborateur.telephone) }}
+        </div>
+        <div>
+            {{ form_row(formNewCollaborateur.etat) }}
+            {{ form_row(formNewCollaborateur.profil) }}
+            {{ form_row(formNewCollaborateur.roles) }}
+        </div>
+        <button>Ajouter</button>
+        {{ form_end(formNewCollaborateur) }}
+    </div>
+
+
+
+    <h2>Liste des Collaborateur</h2>
+    {% for user in  collaborateurList %}
+        {% if user.profil.nom == 'Collaborateur' %}
+        <ul>
+            <li>{{ user.nom | upper }} {{ user.prenom }}</li>
+            <li><a href ={{ path('singleProfil', {idProfil:user.profil.id, idUser:user.id}) }}>Voir le profil</a></li>
+            <li><a href= {{ path('modifCollaborateur', {idUser : user.id, idProfil:user.profil.id})  }}>Modifier</a></li>
+            <li><a href= {{ path('suppCollaborateur', {idUser : user.id})  }}>Supprimer</a></li>
+        </ul>
+        {% endif %}
+    {% endfor %}
+
+
+
+{% endblock %}

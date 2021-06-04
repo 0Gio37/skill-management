@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% if skillSearched is defined %}
+
+        <h1>Résultat de la recherche pour la compétence préférée "{{skillSearched.nom.nom }}" </h1>
+        {% for el in LienUserSkill %}
+            {% if skillSearched.nom.id == el.skill.id and el.prefer == true %}
+                {% for user in listUser %}
+                    {%  if user.id == el.user.id %}
+                        <li><a href ={{  path('singleProfil', {idProfil:user.profil.id, idUser:user.id}) }}>{{ user.nom | upper }} {{ user.prenom }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+
+        <a href={{ path('searchByPrefer') }}>Lancer une nouvelle recherche</a>
+
+    {% else %}
+
+        <h1>Recherche avancée par COMPETENCE préférée</h1>
+        {{ form_start(formSearchByPrefer) }}
+        {{ form_row(formSearchByPrefer.nom) }}
+        <button>Afficher</button>
+        {{ form_end(formSearchByPrefer) }}
+
+    {% endif %}
+
+{% endblock %}

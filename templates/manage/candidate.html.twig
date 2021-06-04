@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List Candidates{% endblock %}
+
+{% block body %}
+
+
+    <h1>GESTION DES CANDIDATS</h1>
+
+    <h2>Ajouter un candidat</h2>
+    <div>
+        {{ form_start(formNewCandidate) }}
+        <div>
+            {{ form_row(formNewCandidate.nom) }}
+            {{ form_row(formNewCandidate.prenom) }}
+            {{ form_row(formNewCandidate.email) }}
+            {{ form_row(formNewCandidate.password) }}
+        </div>
+        <div>
+            {{ form_row(formNewCandidate.adresse) }}
+            {{ form_row(formNewCandidate.cp) }}
+            {{ form_row(formNewCandidate.ville) }}
+            {{ form_row(formNewCandidate.telephone) }}
+        </div>
+        <div>
+            {{ form_row(formNewCandidate.etat) }}
+            {{ form_row(formNewCandidate.profil) }}
+            {{ form_row(formNewCandidate.roles) }}
+        </div>
+        <button>Ajouter</button>
+        {{ form_end(formNewCandidate) }}
+    </div>
+
+
+
+    <h2>Liste des Candidats</h2>
+    {% for user in  candidateList %}
+        {% if user.profil.nom == 'Candidat' %}
+        <ul>
+            <li>{{ user.nom | upper }} {{ user.prenom }}</li>
+            <li><a href ={{ path('singleProfil', {idProfil:user.profil.id, idUser:user.id}) }}>Voir le profil</a></li>
+              <li><a href= {{ path('modifCandidate', {idUser : user.id, idProfil:user.profil.id})  }}>Modifier</a></li>
+            <li><a href= {{ path('suppCandidate', {idUser : user.id})  }}>Supprimer</a></li>
+        </ul>
+        {% endif %}
+    {% endfor %}
+
+
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Company Management{% endblock %}
+
+{% block body %}
+
+    <h1>GESTION DES ENTREPRISES</h1>
+
+    <h2>Renseigner les nouvelles valeurs</h2>
+
+    {{ form_start(modifCompForm) }}
+    {{ form_row(modifCompForm.nom) }}
+    {{ form_row(modifCompForm.lieu) }}
+    <button>Modifier</button>
+    {{ form_end(modifCompForm) }}
+
+    <a href= {{ path('manageCompany')  }}><button>Annuler</button></a>
+
+{% endblock %}

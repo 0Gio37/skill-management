@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+{%  for user in allCollaborateurs %}
+    <li><a href ={{ path('singleProfil', {idProfil:user.profil.id, idUser:user.id}) }}>{{ user.nom | upper }} {{ user.prenom }}</a></li>
+{% endfor %}
+
+{% endblock %}

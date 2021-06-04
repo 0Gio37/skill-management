@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification User Skills{% endblock %}
+
+{% block body %}
+
+    <h1>MODIFIER UNE COMPETENCE</h1>
+
+
+    <a href ={{  path('singleProfilSkills', {idUser:idUser,idProfil:modifUserSkill.user.profil.id}) }}>Retour aux compétences</a>
+
+    {{ form_start(modifUserSkillForm) }}
+    {{ form_row(modifUserSkillForm.skill) }}
+    {{ form_row(modifUserSkillForm.expertise) }}
+    {{ form_row(modifUserSkillForm.prefer) }}
+    <button>Modifier</button>
+    {{ form_end(modifUserSkillForm) }}
+
+{% endblock %}
+
+

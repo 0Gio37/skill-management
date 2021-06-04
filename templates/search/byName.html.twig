@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% set diplayResult = false %}
+
+    {% if nameSearched is defined %}
+
+        <h1>Résultat de la recherche pour "{{nameSearched.nom }}" </h1>
+        {% for user in listUser %}
+            {% if nameSearched.nom | upper == user.nom | upper %}
+            <li><a href ={{ path('singleProfil', {idProfil:user.profil.id, idUser:user.id}) }}>{{ user.nom | upper }} {{ user.prenom }}</a></li>
+                {%  set  diplayResult = true %}
+            {%  else %}
+            {% endif %}
+        {% endfor %}
+        {% if diplayResult == false %}
+            <p>Aucune Correspondance ! </p>
+        {% endif %}
+
+        <a href={{ path('searchByName') }}>Lancer une nouvelle recherche</a>
+
+
+    {% else %}
+
+        <h1>Recherche avancée par NOM</h1>
+
+        {{ form_start(formSearchByName) }}
+        {{ form_row(formSearchByName.nom) }}
+        <button>Afficher</button>
+        {{ form_end(formSearchByName) }}
+
+    {% endif %}
+
+
+
+
+
+{% endblock %}

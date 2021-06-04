@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% if skillLevelSearched is defined %}
+
+        <h1>Résultat de la recherche pour un niveau "{{ skillLevelSearched.niveau.niveau }}" dans la compétence "{{skillLevelSearched.nom.nom }}</h1>
+
+        {% for el in LienUserSkill %}
+            {% if skillLevelSearched.nom.id == el.skill.id and skillLevelSearched.niveau.id == el.expertise.id %}
+                {% for user in listUser %}
+                    {%  if user.id == el.user.id %}
+                        <li><a href ={{  path('singleProfil', {idProfil:user.profil.id, idUser:user.id}) }}>{{ user.nom | upper }} {{ user.prenom }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+
+        <a href={{ path('searchBySkillLevel') }}>Lancer une nouvelle recherche</a>
+
+
+    {% else %}
+
+        <h1>Recherche avancée par NIVEAU de COMPETENCE</h1>
+
+        {{ form_start(formSearchBySkillLevel) }}
+        {{ form_row(formSearchBySkillLevel.niveau) }}
+        {{ form_row(formSearchBySkillLevel.nom) }}
+        <button>Afficher</button>
+        {{ form_end(formSearchBySkillLevel) }}
+
+   {% endif%}
+
+
+{% endblock %}

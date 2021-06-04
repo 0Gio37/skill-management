@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Single Profil{% endblock %}
+
+
+{% block body %}
+
+    <h1>PROFIL {{ oneProfil.profil.nom | upper}}</h1>
+
+    {% if idUser is same as(app.user.id | trans) %}
+
+    {% endif %}
+
+    <ul>
+        <li><a href ={{  path('singleProfilMissions', {idUser:oneProfil.id,idProfil:idProfil}) }}>Missions</a></li>
+        <li><a href ={{  path('singleProfilSkills', {idUser:oneProfil.id,idProfil:idProfil}) }}>Compétences</a></li>
+    </ul>
+
+    <div>
+        {{ oneProfil.nom | upper }} {{ oneProfil.prenom }}
+    </div>
+
+    {% if (app.user.roles[0] is same as('ROLE_USER')) or (app.user.roles[0] is same as('ROLE_ADMIN')) %}
+        <div>
+            {% if oneProfil.profil.nom is same as('Candidat') %}
+                <a href ={{  path('modifCandidate', {idUser:oneProfil.id, idProfil:idProfil}) }}>Modifier les informations</a>
+            {% else %}
+                <a href ={{  path('modifCollaborateur', {idUser:oneProfil.id, idProfil:idProfil}) }}>Modifier les informations</a>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <ul>
+        <li>Adresse</li>
+        <li>{{ oneProfil.adresse }}</li>
+    </ul>
+    <ul>
+        <li>Code Postal</li>
+        <li>{{ oneProfil.cp }}</li>
+    </ul>
+    <ul>
+        <li>Ville</li>
+        <li>{{ oneProfil.ville }}</li>
+    </ul>
+    <ul>
+        <li>Email</li>
+        <li>{{ oneProfil.email }}</li>
+    </ul>
+    <ul>
+        <li>Téléphone</li>
+        <li>{{ oneProfil.telephone }}</li>
+    </ul>
+    <ul>
+        {%  if not is_granted('ROLE_USER') %}
+            {% if oneProfil.etat == true %}
+                <li>Actuellement dans la société</li>
+            {% else %}
+                <li>A quitté la société</li>
+            {% endif %}
+        {% endif %}
+    </ul>
+
+{% endblock %}

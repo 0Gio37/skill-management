@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List Category{% endblock %}
+
+{% block body %}
+
+    <h1>GESTION DES CATEGORIES</h1>
+
+    <h2>Ajouter une catégorie</h2>
+    <div>
+        {{ form_start(formNewCat) }}
+        {{ form_row(formNewCat.nom) }}
+        <button>Ajouter</button>
+        {{ form_end(formNewCat) }}
+    </div>
+
+
+    <h2>Liste des catégories</h2>
+    {% for cat in  categoryList %}
+    <ul>
+        <li>{{ cat.nom | upper }}</li>
+        <li><a href= {{ path('modifCategory', {idUser : cat.id})  }}>Modifier</a></li>
+        <li><a href= {{ path('suppCategory', {idUser : cat.id})  }}>Supprimer</a></li>
+    </ul>
+    {% endfor %}
+
+
+{% endblock %}

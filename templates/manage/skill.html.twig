@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List Skills{% endblock %}
+
+{% block body %}
+
+    <h1>GESTION DES COMPETENCES</h1>
+
+    <div>
+        {{ form_start(formNewSkill) }}
+        {{ form_row(formNewSkill.nom) }}
+        {{ form_row(formNewSkill.category) }}
+        <button>Ajouter une compétence</button>
+        {{ form_end(formNewSkill) }}
+    </div>
+
+    <h2>Liste des compétences</h2>
+    {%  for cat in categoryList %}
+        <p>{{ cat.nom | upper }}</p>
+            {% for sk in skillList %}
+                {%  if cat.nom is same as(sk.category.nom) %}
+                    <ul>
+                        <li>{{ sk.nom }}</li>
+                        <li><a href= {{ path('modifSkill', {idUser : sk.id})  }}>Modifier</a></li>
+                        <li><a href= {{ path('suppSkill', {idUser : sk.id})  }}>Supprimer</a></li>
+                    </ul>
+                {% endif %}
+            {% endfor %}
+    {% endfor %}
+
+
+{% endblock %}

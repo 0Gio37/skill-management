@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+    <h1>Recherche avancée</h1>
+    <ul>
+        <li><a href={{ path('searchByName') }}>Rechercher par NOM</a></li>
+        <li><a href={{ path('searchBySkill') }}>Rechercher par COMPETENCE</a></li>
+        <li><a href={{ path('searchBySkillLevel') }}>Rechercher par NIVEAU de COMPETENCE</a></li>
+        <li><a href={{ path('searchByPrefer') }}>Rechercher par COMPETENCE préférée</a></li>
+        <li><a href={{ path('allCollaborateursList') }}>Lister tous les COLLABORATEURS</a></li>
+        <li><a href={{ path('allCandidateList') }}>Lister tous les CANDIDATS</a></li>
+    </ul>
+
+{% endblock %}

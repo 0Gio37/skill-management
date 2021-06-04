@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Collaborateur Management{% endblock %}
+
+{% block body %}
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <h1>GESTION DES COLLABORATEURS</h1>
+        <h2>Renseigner les modifications</h2>
+    {% else %}
+        <h1>MODIFIER VOS DONNÉES PERSONNELLES</h1>
+    {% endif %}
+
+    <div>
+        {{ form_start(modifCollaborateurForm) }}
+        <div>
+            {{ form_row(modifCollaborateurForm.nom) }}
+            {{ form_row(modifCollaborateurForm.prenom) }}
+            {% if is_granted('ROLE_ADMIN') %}
+                {{ form_row(modifCollaborateurForm.email) }}
+                {{ form_row(modifCollaborateurForm.password) }}
+            {% endif %}
+        </div>
+        <div>
+            {{ form_row(modifCollaborateurForm.adresse) }}
+            {{ form_row(modifCollaborateurForm.cp) }}
+            {{ form_row(modifCollaborateurForm.ville) }}
+            {{ form_row(modifCollaborateurForm.telephone) }}
+        </div>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div>
+                {{ form_row(modifCollaborateurForm.etat) }}
+                {{ form_row(modifCollaborateurForm.profil) }}
+                {{ form_row(modifCollaborateurForm.roles) }}
+            </div>
+        {% endif %}
+        <button>Modifier</button>
+        {{ form_end(modifCollaborateurForm) }}
+    </div>
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href= {{ path('manageCollaborateur')  }}><button>Annuler</button></a>
+    {% else %}
+        <a href ={{  path('singleProfil', {idProfil:currentIdProfil, idUser:currentId}) }}><button>Annuler</button></a>
+    {% endif %}
+
+{% endblock %}

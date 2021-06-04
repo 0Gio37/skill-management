@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Main Page : Dashbord{% endblock %}
+
+{% block body %}
+
+    <div>
+        <h1>TABLEAU DE BORD</h1>
+        <div>
+            <h2>Sur le mois de {{ "now" | date("M") | format_date(locale='fr', pattern="MMMM YYYY") }}</h2>
+            <div>
+                <p>{{ sumNewCollabCurrentMonth }}</p>
+                <p>Nouveaux Collaborateurs</p>
+            </div>
+            <div>
+                <p>{{ sumTbCollabModification }}</p>
+                <p>Collaborateurs modifiés</p>
+                <p><a href={{ path('showCollabModif') }}>Voir les collaborateurs</a></p>
+            </div>
+            <div>
+                <p>{{ sumNewCandidCurrentMonth }}</p>
+                <p>Nouveaux Candidats</p>
+            </div>
+        </div>
+
+        <h2>Les derniers inscrits</h2>
+        <ul>
+            {% for user in lastUsers %}
+                <li><a href ={{  path('singleProfil', {idProfil:user.profil.id, idUser:user.id}) }}>{{ user.prenom }} {{ user.nom | upper }}</a></li>
+                <li>Crée le : {{ user.createdAt | date('d M Y') | format_date(locale='fr') }} à  {{ user.createdAt | date('H:i:s') }}</li>
+                <li>Profil :  {{ user.profil.nom }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
