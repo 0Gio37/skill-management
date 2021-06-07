@@ -23,9 +23,11 @@
     padding-right: 2%;
     padding-left: 2%;
 }
+
 .main{
     display: grid;
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 1fr 5fr;
+    grid-column-gap: 2%;
     padding-right: 2%;
     padding-left: 2%;
 }

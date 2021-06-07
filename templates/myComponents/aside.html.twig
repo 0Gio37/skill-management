@@ -1,16 +1,24 @@
-<a class="btn btn-info" data-bs-toggle="collapse" href="#panAdmin" role="button" aria-expanded="false" aria-controls="panAdmin">
+{% if is_granted('ROLE_ADMIN') %}
+<div class="bg-warning text-dark">
     Panneau d'administration
-</a>
-
-<div class="collapse" id="panAdmin">
+</div>
     <ul>
-        <li><a href= {{ path('manageCandidate')  }}>Gestion des candidats</a></li>
-        <li><a href= {{ path('manageCollaborateur')  }}>Gestion des collaborateurs</a></li>
-        <li><a href= {{ path('manageSkill')  }}>Gestion des compétences</a></li>
-        <li><a href= {{ path('manageCategory')  }}>Gestion des catégories</a></li>
-        <li><a href= {{ path('manageCompany')  }}>Gestion des entreprises</a></li>
+        <li><a class="text-secondary" href= {{ path('manageCandidate')  }}>Gestion des candidats</a></li>
+        <li><a class="text-secondary" href= {{ path('manageCollaborateur')  }}>Gestion des collaborateurs</a></li>
+        <li><a class="text-secondary" href= {{ path('manageSkill')  }}>Gestion des compétences</a></li>
+        <li><a class="text-secondary" href= {{ path('manageCategory')  }}>Gestion des catégories</a></li>
+        <li><a class="text-secondary" href= {{ path('manageCompany')  }}>Gestion des entreprises</a></li>
     </ul>
+
+{% elseif app.user.roles[0] is same as "ROLE_STRUCTURE" %}
+<div class="bg-warning text-dark">
+    Suivi des profils
 </div>
 
+{% else %}
+<div class="bg-warning text-dark">
+    Votre espace personnel
+</div>
+{% endif %}
 
 

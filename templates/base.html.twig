@@ -30,9 +30,9 @@
 
         <div class="main">
             <aside class="aside-bar">
-                {% if is_granted('ROLE_ADMIN') %}
+
                     {% include'myComponents/aside.html.twig' %}
-                {% endif %}
+
             </aside>
         <section class="content">
             {% for type, messages in app.flashes %}

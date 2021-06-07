@@ -61,7 +61,7 @@ class ManageUserController extends AbstractController
         {
             $modifCandidate->setPassword($passwordEncoder->encodePassword($modifCandidate, $modifCandidate->getPassword()));
             $this->entityManager->flush();
-            $this->addFlash('info',  'Candidat modifié !');
+            $this->addFlash('info',  'Profil modifié !');
             if($modifCandidate->getRoles() === "ROLE_ADMIN" ){
                 return $this->redirectToRoute('manageCandidate');
             } else{
@@ -131,7 +131,7 @@ class ManageUserController extends AbstractController
         {
             $modifCollaborateur->setPassword($passwordEncoder->encodePassword($modifCollaborateur, $modifCollaborateur->getPassword()));
             $this->entityManager->flush();
-            $this->addFlash('info', 'Collaborateur modifié !');
+            $this->addFlash('info', 'Profil modifié !');
 
             if($modifCollaborateur->getRoles() === "ROLE_ADMIN" ){
                 return $this->redirectToRoute('manageCollaborateur');
