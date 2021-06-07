@@ -1,3 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @import "../../node_modules/bootstrap";
 
+.alert{
+    text-align: center;
+    color: white;
+    font-style: italic;
+    border: none;
+    margin: 0;
+    padding: 10px;
+}
+.alert-success{
+    background-color: green;
+}
+.alert-info{
+    background-color: deepskyblue;
+}
+.alert-alert{
+    background-color: red;
+}
+
+

@@ -132,6 +132,8 @@ class HomeController extends AbstractController
             $data = $addMissionlUserForm->getData();
             $this->entityManager->persist($data);
             $this->entityManager->flush();
+
+            $this->addFlash('success', 'Mission ajoutée !');
         }
 
         $missionProfil = $this->entityManager->getRepository(Mission::class)->findBy(["user"=>$idUser],["debut"=>"DESC"]);
@@ -163,7 +165,7 @@ class HomeController extends AbstractController
 
             $this->entityManager->flush();
 
-            $this->addFlash('success', 'Modification effectuée avec succès');
+            $this->addFlash('info', 'Modification effectuée !');
             return $this->redirectToRoute('singleProfilMissions', ['idUser'=>$idUser]);
         }
 
@@ -185,7 +187,7 @@ class HomeController extends AbstractController
         $item->remove($suppUserMission);
         $item->flush();
 
-        $this->addFlash('alert', 'Suppression de la mission effectuée avec succès');
+        $this->addFlash('alert', 'Mission supprimée !');
 
         return $this->redirectToRoute('singleProfilMissions', ['idUser'=>$idUser]);
     }
@@ -207,6 +209,7 @@ class HomeController extends AbstractController
             $data = $addSkillUserForm->getData();
             $this->entityManager->persist($data);
             $this->entityManager->flush();
+            $this->addFlash('success', 'Compétence ajoutée !');
         }
 
         $skillId = $this->entityManager->getRepository(LienUserSkill::class)->findBy(["user"=>$idUser]);
@@ -239,7 +242,7 @@ class HomeController extends AbstractController
             $userModified = $this->entityManager->getRepository(User::class)->findOneBy(["id"=>$idUserModified]);
             $userModified->updateTimestanps();
             $this->entityManager->flush();
-            $this->addFlash('success', 'Compétence modifiée avec succès');
+            $this->addFlash('info', 'Compétence modifiée !');
             return $this->redirectToRoute('singleProfilSkills', ['idUser'=>$idUser]);
         }
 
@@ -260,7 +263,7 @@ class HomeController extends AbstractController
         $item = $this->getDoctrine()->getManager();
         $item->remove($suppUserSkill);
         $item->flush();
-        $this->addFlash('alert', 'Suppression dela compétence effectuée avec succès');
+        $this->addFlash('alert', 'Compétence supprimée !');
 
         return $this->redirectToRoute('singleProfilSkills', ['idUser'=>$idUser]);
     }

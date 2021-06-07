@@ -9,9 +9,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=LienUserSkillRepository::class)
- * @UniqueEntity(fields = {"user", "skill"},
- *     errorPath="skill",
- *     message="Compétence deja listée une fois")
  */
 class LienUserSkill
 {
@@ -26,12 +23,12 @@ class LienUserSkill
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="lienUserSkills")
      * @JoinColumn(name="user_id", referencedColumnName="id")
      */
-    protected $user;
+    private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity=Skill::class, inversedBy="lienUserSkills")
      */
-    protected $skill;
+    private $skill;
 
     /**
      * @ORM\ManyToOne(targetEntity=Expertise::class, inversedBy="lienUserSkills")
