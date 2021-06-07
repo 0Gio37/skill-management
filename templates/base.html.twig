@@ -12,6 +12,7 @@
             {#{{ encore_entry_script_tags('app') }}#}
         {% endblock %}
     </head>
+
     <body class="bg-light">
     {% if (app.user.profil.nom is not same as('Structure')) and (idUser is not same as(app.user.id)) %}
         <div>
@@ -23,26 +24,32 @@
         </div>
 
     {% else %}
-        {% include 'myComponents/nav.html.twig' %}
+        <header class="header">
+            {% include 'myComponents/nav.html.twig' %}
+        </header>
 
-        {% if is_granted('ROLE_ADMIN') %}
-            {% include'myComponents/aside.html.twig' %}
-        {% endif %}
-
-        {% for type, messages in app.flashes %}
-            {% for message in messages %}
-                <div class="alert alert-{{ type }}">
-                    {{ message }}
-                </div>
+        <div class="main">
+            <aside class="aside-bar">
+                {% if is_granted('ROLE_ADMIN') %}
+                    {% include'myComponents/aside.html.twig' %}
+                {% endif %}
+            </aside>
+        <section class="content">
+            {% for type, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ type }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
             {% endfor %}
-        {% endfor %}
 
-        {% block body %}{% endblock %}
-
-        {% include 'myComponents/footer.html.twig' %}
-
-
+            {% block body %}{% endblock %}
+        </section>
     {% endif %}
+        </div>
+        <footer class="footer text-warning bg-dark">
+            {% include 'myComponents/footer.html.twig' %}
+        </footer>
     </body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </html>

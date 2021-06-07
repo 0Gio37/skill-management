@@ -1,16 +1,15 @@
-<div>
-    {% if app.user %}
-        <div class="mb-3">
-            Connecté en tant que {{ app.user.nom }} {{ app.user.prenom }}
-        </div>
-        {%  if app.user.roles[0] is same as "ROLE_ADMIN" %}
-            <div>
-                COMPTE ADMINISTRATEUR
-            </div>
-            {% else %}
-                <div>
-                    COMPTE UTILISATEUR
-                </div>
-        {% endif %}
-    {% endif %}
-</div>
+{%  if app.user.roles[0] is same as "ROLE_ADMIN" %}
+    <div>
+        COMPTE ADMINISTRATEUR
+    </div>
+{% else %}
+    <div>
+        COMPTE UTILISATEUR
+    </div>
+{% endif %}
+
+{% if app.user %}
+    <div class="mb-3">
+        Connecté en tant que {{ app.user.nom }} {{ app.user.prenom }}
+    </div>
+{% endif %}

@@ -3,12 +3,10 @@
 {% block title %}show Collaborateur Last Modifications{% endblock %}
 
 {% block body %}
-
         <h1>Derniers collaborateurs modifiés</h1>
 
         {% for user in tbCollabModification %}
                 <li><a href ={{  path('singleProfil', {idProfil:user.profil.id, idUser:user.id}) }}>{{ user.prenom }} {{ user.nom | upper }}</a></li>
                 <li>Modifié le : {{ user.createdAt | date('d M Y') | format_date(locale='fr') }} à  {{ user.createdAt | date('H:i:s') }}</li>
         {% endfor %}
-
 {% endblock %}

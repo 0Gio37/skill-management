@@ -1,8 +1,16 @@
-<h3>Panneau d'Administration</h3>
-<ul>
-    <li><a href= {{ path('manageCandidate')  }}>Gestion des candidats</a></li>
-    <li><a href= {{ path('manageCollaborateur')  }}>Gestion des collaborateurs</a></li>
-    <li><a href= {{ path('manageSkill')  }}>Gestion des compétences</a></li>
-    <li><a href= {{ path('manageCategory')  }}>Gestion des catégories</a></li>
-    <li><a href= {{ path('manageCompany')  }}>Gestion des entreprises</a></li>
-</ul>
+<a class="btn btn-info" data-bs-toggle="collapse" href="#panAdmin" role="button" aria-expanded="false" aria-controls="panAdmin">
+    Panneau d'administration
+</a>
+
+<div class="collapse" id="panAdmin">
+    <ul>
+        <li><a href= {{ path('manageCandidate')  }}>Gestion des candidats</a></li>
+        <li><a href= {{ path('manageCollaborateur')  }}>Gestion des collaborateurs</a></li>
+        <li><a href= {{ path('manageSkill')  }}>Gestion des compétences</a></li>
+        <li><a href= {{ path('manageCategory')  }}>Gestion des catégories</a></li>
+        <li><a href= {{ path('manageCompany')  }}>Gestion des entreprises</a></li>
+    </ul>
+</div>
+
+
+
