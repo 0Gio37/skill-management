@@ -10,17 +10,16 @@
         </div>
 
         <div class="ps-5">
-            <div class="d-flex mb-5">
-                <button class="me-4 bg-light text-primary btn-primary rounded-top border-bottom-0 ps-5 pe-5" disabled> Missions </button>
-                <button class="btn-primary rounded-top border-bottom-0 ps-4 pe-4"><a class="text-light text-decoration-none"  href ={{  path('singleProfilSkills', {idUser:oneProfil.id,idProfil:idProfil}) }}>Compétences</a></button>
+            <div class="d-flex mb-4">
+                <button class="fw-bolder me-4 bg-light text-primary btn-primary rounded border-end-0 border-start-0 ps-5 pe-5" disabled> Missions </button>
+                <button class="btn-light rounded-top border-0 ps-4 pe-4"><a class="text-primary text-decoration-none"  href ={{  path('singleProfilSkills', {idUser:oneProfil.id,idProfil:idProfil}) }}>Compétences</a></button>
             </div>
 {#
             <h1>LISTE DES MISSIONS de {{ user.prenom }} {{ user.nom | upper }} </h1>
 
               <p><a href={{ path('singleProfil', {idUser: user.id,idProfil:user.profil.id}) }}>Retour au Profil</a></p>
 #}
-
-            <h2>Ajouter une mission</h2>
+            {# <h2>Ajouter une mission</h2> #}
             <div>
                 {{ form_start(addMissionlUserForm) }}
                 {{ form_row(addMissionlUserForm.company) }}
@@ -28,7 +27,7 @@
                 {{ form_row(addMissionlUserForm.debut) }}
                 {{ form_row(addMissionlUserForm.fin) }}
                 {{ form_row(addMissionlUserForm.en_cours) }}
-                <button class="btn btn-primary">Ajouter</button>
+                <button class="btn btn-primary">Ajouter une mission</button>
                 {{ form_end(addMissionlUserForm) }}
             </div>
 

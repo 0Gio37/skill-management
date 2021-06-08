@@ -22,19 +22,19 @@ class NewSkillUserType extends AbstractType
                     'oui'=> true,
                     'non'=> false
                     ],
-                'label'=> 'Compétence favorite ?',
+                'label'=> ' ',
                 'required'=>true
                 ])
             ->add('skill', EntityType::class, [
                 'class'=> Skill::class,
                 'choice_label'=> 'nom',
-                'label'=> 'Liste des compétences',
+                'label'=> ' ',
                 'required'=>true
             ])
             ->add('expertise', EntityType::class, [
                 'class'=> Expertise::class,
                 'choice_label'=> 'niveau',
-                'label'=> 'Niveau d\'expertise',
+                'label'=> ' ',
                 'required'=>true
             ])
         ;
