@@ -104,6 +104,10 @@ class HomeController extends AbstractController
         $addMissionlUserForm = $this->createForm(NewMissionUserType::class, $addMissionlUser);
         $addMissionlUserForm->handleRequest($request);
 
+        /*test ajout du single profil include*/
+        $prof = $user-> getProfil()->getId();
+
+
         if($addMissionlUserForm->isSubmitted() && $addMissionlUserForm->isValid())
         {
             $addMissionlUser->setUser($user);
@@ -122,7 +126,10 @@ class HomeController extends AbstractController
             'missionProfil' => $missionProfil,
             'listEntreprise' => $listEntreprise,
             'user'=>$user,
-            'idUser'=>$idUser
+            'idUser'=>$idUser,
+            /*test ajout du single profil include*/
+            'oneProfil'=>$user,
+           'idProfil'=> $prof
         ]);
     }
 
@@ -181,6 +188,9 @@ class HomeController extends AbstractController
         $addSkillUserForm = $this->createForm(NewSkillUserType::class, $addSkillUser);
         $addSkillUserForm->handleRequest($request);
 
+        /*test ajout du single profil include*/
+        $prof = $user-> getProfil()->getId();
+
         if($addSkillUserForm->isSubmitted() && $addSkillUserForm->isValid())
         {
             $addSkillUser->setUser($user);
@@ -200,7 +210,10 @@ class HomeController extends AbstractController
             'listSkill' => $listSkill,
             'listCategory'=> $listCategory,
             'user'=>$user,
-            'idUser'=>$idUser
+            'idUser'=>$idUser,
+            /*test ajout du single profil include*/
+            'oneProfil'=>$user,
+            'idProfil'=> $prof
         ]);
     }
 

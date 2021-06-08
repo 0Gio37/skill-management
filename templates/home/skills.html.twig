@@ -4,51 +4,54 @@
 
 {% block body %}
 
-    <h1>LISTE DES COMPETENCES de {{ user.prenom }} {{ user.nom | upper }}</h1>
+    <div class="d-flex">
+        <div class="w-25">
+            {% include 'home/profil.html.twig' %}
+        </div>
+        <div class="ps-5">
+            <div class="d-flex">
+                <button class="bg-light text-primary me-4 btn-primary rounded-top border-bottom-0 ps-4 pe-4" disabled> Compétences </button>
+                <button class="btn-primary rounded-top border-bottom-0 ps-5 pe-5"><a class="text-light text-decoration-none" href ={{  path('singleProfilMissions', {idUser:oneProfil.id,idProfil:idProfil}) }}> Missions </a></button>
+            </div>
+            {#
+            <h1>LISTE DES MISSIONS de {{ user.prenom }} {{ user.nom | upper }} </h1>
 
-    <p><a href={{ path('singleProfil', {idUser: user.id,idProfil:user.profil.id}) }}>Retour au Profil</a></p>
+              <p><a href={{ path('singleProfil', {idUser: user.id,idProfil:user.profil.id}) }}>Retour au Profil</a></p>
+            #}
+            <h2>Ajouter une compétence</h2>
+            <div>
+                {{ form_start(addSkillUserForm) }}
+                {{ form_row(addSkillUserForm.skill) }}
+                {{ form_row(addSkillUserForm.expertise) }}
+                {{ form_row(addSkillUserForm.prefer) }}
+                <button class="btn btn-primary">Ajouter</button>
+                {{ form_end(addSkillUserForm) }}
+            </div>
 
-    <h2>Ajouter une compétence</h2>
-    <div>
-        {{ form_start(addSkillUserForm) }}
-        {{ form_row(addSkillUserForm.skill) }}
-        {{ form_row(addSkillUserForm.expertise) }}
-        {{ form_row(addSkillUserForm.prefer) }}
-        <button class="btn btn-primary">Ajouter</button>
-        {{ form_end(addSkillUserForm) }}
-    </div>
-
-
-    {% for cat in listCategory %}
-        <ul>
-            <p>{{ cat.nom | upper }}</p>
-            {% for competence in  skillId  %}
-                {% for comp in listSkill %}
-                    {% if comp.id is same as(competence.skill.id) %}
-                        {% if cat.id is same as(comp.category.id) %}
-                            <li>{{ comp.nom }}</li>
-                            <li>Niveau : {{ competence.expertise.niveau }}</li>
-                            {% if competence.prefer == true %}
-                            <li>Favori : Oui</li>
-                            {% else %}
-                            <li>Favori : Non</li>
+            {% for cat in listCategory %}
+                <ul>
+                    <p>{{ cat.nom | upper }}</p>
+                    {% for competence in  skillId  %}
+                        {% for comp in listSkill %}
+                            {% if comp.id is same as(competence.skill.id) %}
+                                {% if cat.id is same as(comp.category.id) %}
+                                    <li>{{ comp.nom }}</li>
+                                    <li>Niveau : {{ competence.expertise.niveau }}</li>
+                                    {% if competence.prefer == true %}
+                                        <li>Favori : Oui</li>
+                                    {% else %}
+                                        <li>Favori : Non</li>
+                                    {% endif %}
+                                    <li><a href= {{ path('singleProfilSkillModification', {idLienUserSkill : competence.id, idUser: user.id})  }}>Modifier</a></li>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <li><a href= {{ path('singleProfilSkillDelete', {idLienUserSkill : competence.id, idUser: user.id})  }}>Supprimer</a></li>
+                                    {% endif %}
                                 {% endif %}
-                            <li><a href= {{ path('singleProfilSkillModification', {idLienUserSkill : competence.id, idUser: user.id})  }}>Modifier</a></li>
-                            {% if is_granted('ROLE_ADMIN') %}
-                                <li><a href= {{ path('singleProfilSkillDelete', {idLienUserSkill : competence.id, idUser: user.id})  }}>Supprimer</a></li>
                             {% endif %}
-                        {% endif %}
-                    {% endif %}
-                {% endfor %}
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
             {% endfor %}
-        </ul>
-    {% endfor %}
-
-
-
-
-
-
 {% endblock %}
 
 

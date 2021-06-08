@@ -29,10 +29,10 @@
         </header>
 
         <main class="main mt-4 mb-4">
-            <aside class="aside-bar">
+            <aside class="aside-bar border-end pb-4 mb-5 pe-4 border-dark">
                     {% include'myComponents/aside.html.twig' %}
             </aside>
-            <section class="content border-start border-dark ps-4 mb-5 pb-5">
+            <section class="content mb-5 pb-5">
                 {% for type, messages in app.flashes %}
                     {% for message in messages %}
                         <div class="alert alert-{{ type }}">

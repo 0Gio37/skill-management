@@ -1,3 +1,4 @@
+{#
 {% extends 'base.html.twig' %}
 
 {% block title %}Single Profil{% endblock %}
@@ -5,55 +6,61 @@
 
 {% block body %}
 
-    <h1>PROFIL {{ oneProfil.profil.nom | upper}}</h1>
+#}
 
+
+{#
         <h4><a href ={{  path('singleProfilMissions', {idUser:oneProfil.id,idProfil:idProfil}) }}>Missions</a></h4>
         <h4><a href ={{  path('singleProfilSkills', {idUser:oneProfil.id,idProfil:idProfil}) }}>Compétences</a></h4>
+#}
 
-    <h2>{{ oneProfil.nom | upper }} {{ oneProfil.prenom }}</h2>
+    <h1 class="text-center mb-3">{{ oneProfil.nom | upper }} {{ oneProfil.prenom }}</h1>
 
-    {% if (app.user.roles[0] is same as('ROLE_USER')) or (app.user.roles[0] is same as('ROLE_ADMIN')) %}
-        <div>
-            {% if oneProfil.profil.nom is same as('Candidat') %}
-                <a href ={{  path('modifCandidate', {idUser:oneProfil.id, idProfil:idProfil}) }}><button type="button" class="btn btn-outline-primary">Modifier les informations</button></a>
-            {% else %}
-                <a href ={{  path('modifCollaborateur', {idUser:oneProfil.id, idProfil:idProfil}) }}><button type="button" class="btn btn-outline-primary">Modifier les informations</button></a>
-            {% endif %}
-        </div>
-    {% endif %}
+    <h4 class="text-center text-warning mb-5"> - {{ oneProfil.profil.nom | upper}} - </h4>
 
-    <ul>
-        <li>Adresse</li>
-        <li>{{ oneProfil.adresse }}</li>
-    </ul>
-    <ul>
-        <li>Code Postal</li>
-        <li>{{ oneProfil.cp }}</li>
-    </ul>
-    <ul>
-        <li>Ville</li>
-        <li>{{ oneProfil.ville }}</li>
-    </ul>
-    <ul>
-        <li>Email</li>
-        <li>{{ oneProfil.email }}</li>
-    </ul>
-    <ul>
-        <li>Téléphone</li>
-        <li>{{ oneProfil.telephone }}</li>
-    </ul>
-    <ul>
-        <li>Inscrit depuis le</li>
-        <li>{{ oneProfil.createdAt | date('d M Y') | format_date(locale='fr') }}</li>
-    </ul>
-    <ul>
+    <div class="mb-4">
+        <h5>Adresse</h5>
+        <p>{{ oneProfil.adresse }}</p>
+    </div>
+    <div class="mb-4">
+        <h5>Code Postal</h5>
+        <p>{{ oneProfil.cp }}</p>
+    </div>
+    <div class="mb-4">
+        <h5>Ville</h5>
+        <p>{{ oneProfil.ville }}</p>
+    </div>
+    <div class="mb-4">
+        <h5>Email</h5>
+        <p>{{ oneProfil.email }}</p>
+    </div>
+    <div class="mb-4">
+        <h5>Téléphone</h5>
+        <p>{{ oneProfil.telephone }}</p>
+    </div>
+    <div class="mb-4">
+        <h5>Inscrit depuis le</h5>
+        <p>{{ oneProfil.createdAt | date('d M Y') | format_date(locale='fr') }}</p>
+    </div>
+
+    <div class="mb-4">
         {%  if not is_granted('ROLE_USER') %}
             {% if oneProfil.etat == true %}
-                <li>Actuellement dans la société</li>
+                <h5>Actuellement dans la société</h5>
             {% else %}
-                <li>A quitté la société</li>
+                <p>A quitté la société</p>
             {% endif %}
         {% endif %}
-    </ul>
+    </div>
 
-{% endblock %}
+{% if (app.user.roles[0] is same as('ROLE_USER')) or (app.user.roles[0] is same as('ROLE_ADMIN')) %}
+    <div>
+        {% if oneProfil.profil.nom is same as('Candidat') %}
+            <a href ={{  path('modifCandidate', {idUser:oneProfil.id, idProfil:idProfil}) }}><button type="button" class="btn btn-outline-primary">Modifier les informations</button></a>
+        {% else %}
+            <a href ={{  path('modifCollaborateur', {idUser:oneProfil.id, idProfil:idProfil}) }}><button type="button" class="btn btn-outline-primary">Modifier les informations</button></a>
+        {% endif %}
+    </div>
+{% endif %}
+
+{# {% endblock %} #}
