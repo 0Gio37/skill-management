@@ -51,6 +51,10 @@
         <li>{{ oneProfil.telephone }}</li>
     </ul>
     <ul>
+        <li>Inscrit depuis le</li>
+        <li>{{ oneProfil.createdAt | date('d M Y') | format_date(locale='fr') }}</li>
+    </ul>
+    <ul>
         {%  if not is_granted('ROLE_USER') %}
             {% if oneProfil.etat == true %}
                 <li>Actuellement dans la société</li>

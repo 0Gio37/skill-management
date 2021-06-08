@@ -1,24 +1,26 @@
-{% if is_granted('ROLE_ADMIN') %}
-<div class="bg-warning text-dark">
-    Panneau d'administration
-</div>
-    <ul>
-        <li><a class="text-secondary" href= {{ path('manageCandidate')  }}>Gestion des candidats</a></li>
-        <li><a class="text-secondary" href= {{ path('manageCollaborateur')  }}>Gestion des collaborateurs</a></li>
-        <li><a class="text-secondary" href= {{ path('manageSkill')  }}>Gestion des compétences</a></li>
-        <li><a class="text-secondary" href= {{ path('manageCategory')  }}>Gestion des catégories</a></li>
-        <li><a class="text-secondary" href= {{ path('manageCompany')  }}>Gestion des entreprises</a></li>
-    </ul>
+<div class="aside-bar-div">
+        {% if is_granted('ROLE_ADMIN') %}
+    <h5 class="bg-warning text-secondary text-center mb-3 shadow">
+        Panneau d'administration
+    </h5>
+        <ul>
+            <li class="mb-2"><a class="text-secondary text-decoration-none" href= {{ path('manageCandidate')  }}>Gestion des candidats</a></li>
+            <li class="mb-2"><a class="text-secondary text-decoration-none" href= {{ path('manageCollaborateur')  }}>Gestion des collaborateurs</a></li>
+            <li class="mb-2"><a class="text-secondary text-decoration-none" href= {{ path('manageSkill')  }}>Gestion des compétences</a></li>
+            <li class="mb-2"><a class="text-secondary text-decoration-none" href= {{ path('manageCategory')  }}>Gestion des catégories</a></li>
+            <li class="mb-2"><a class="text-secondary text-decoration-none" href= {{ path('manageCompany')  }}>Gestion des entreprises</a></li>
+        </ul>
 
-{% elseif app.user.roles[0] is same as "ROLE_STRUCTURE" %}
-<div class="bg-warning text-dark">
-    Suivi des profils
-</div>
+    {% elseif app.user.roles[0] is same as "ROLE_STRUCTURE" %}
+    <div class="bg-warning text-dark">
+        Suivi des profils
+    </div>
 
-{% else %}
-<div class="bg-warning text-dark">
-    Votre espace personnel
+    {% else %}
+    <div class="bg-warning text-dark">
+        Votre espace personnel
+    </div>
+    {% endif %}
 </div>
-{% endif %}
 
 

@@ -28,11 +28,11 @@
             {% include 'myComponents/nav.html.twig' %}
         </header>
 
-        <main class="main">
+        <main class="main mt-4 mb-4">
             <aside class="aside-bar">
                     {% include'myComponents/aside.html.twig' %}
             </aside>
-            <section class="content border-start border-dark ps-4">
+            <section class="content border-start border-dark ps-4 mb-5 pb-5">
                 {% for type, messages in app.flashes %}
                     {% for message in messages %}
                         <div class="alert alert-{{ type }}">

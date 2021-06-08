@@ -71,32 +71,11 @@ class HomeController extends AbstractController
             "sumNewCandidCurrentMonth"=>$sumNewCandidCurrentMonth,
             "sumTbCollabModification"=>$sumTbCollabModification,
             "tbCollabModification"=>$tbCollabModification,
+            "tbCollabCurrentMonth"=>$tbCollabCurrentMonth,
+            "tbCandidCurrentMonth"=>$tbCandidCurrentMonth,
             "test"=>"test"
         ]);
     }
-
-    /**
-     * @Route("/showCollabModif", name="showCollabModif")
-     * @IsGranted("ROLE_STRUCTURE")
-     */
-    public function showCollabModif(): Response
-    {
-        $currentDate = new \DateTime('now');
-        $currentMonth= $currentDate->format(('m'));
-        $tbCollabModification = [];
-        $listUsers = $this->entityManager->getRepository(User::class)->findAll();
-        foreach ($listUsers as $el)
-        {
-            if($el->getCreatedAt() != $el->getUpdatedAt() && $el->getUpdatedAt()->format('m') === $currentMonth && $el->getProfil()->getNom() === "Collaborateur")
-            {
-                array_push($tbCollabModification, $el);
-            }
-        }
-        return $this->render('home/showCollabModif.html.twig',[
-            "tbCollabModification"=>$tbCollabModification
-        ]);
-    }
-
 
     /**
      * @Route ("/profil/{idUser}/{idProfil}", name="singleProfil")
