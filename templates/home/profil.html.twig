@@ -7,18 +7,10 @@
 
     <h1>PROFIL {{ oneProfil.profil.nom | upper}}</h1>
 
-    {% if idUser is same as(app.user.id | trans) %}
+        <h4><a href ={{  path('singleProfilMissions', {idUser:oneProfil.id,idProfil:idProfil}) }}>Missions</a></h4>
+        <h4><a href ={{  path('singleProfilSkills', {idUser:oneProfil.id,idProfil:idProfil}) }}>Compétences</a></h4>
 
-    {% endif %}
-
-    <ul>
-        <li><a href ={{  path('singleProfilMissions', {idUser:oneProfil.id,idProfil:idProfil}) }}>Missions</a></li>
-        <li><a href ={{  path('singleProfilSkills', {idUser:oneProfil.id,idProfil:idProfil}) }}>Compétences</a></li>
-    </ul>
-
-    <div>
-        {{ oneProfil.nom | upper }} {{ oneProfil.prenom }}
-    </div>
+    <h2>{{ oneProfil.nom | upper }} {{ oneProfil.prenom }}</h2>
 
     {% if (app.user.roles[0] is same as('ROLE_USER')) or (app.user.roles[0] is same as('ROLE_ADMIN')) %}
         <div>

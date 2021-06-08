@@ -8,6 +8,10 @@
     </div>
 {% endif %}
 
+<div>
+    {{ "now"| format_date(locale='fr',pattern="EEEE dd MMMM YYYY") }}
+</div>
+
 {% if app.user %}
     <div class="mb-3">
         Connecté en tant que {{ app.user.nom }} {{ app.user.prenom }}

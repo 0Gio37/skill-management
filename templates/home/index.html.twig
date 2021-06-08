@@ -5,7 +5,7 @@
 {% block body %}
     <h1 class="mb-5">TABLEAU DE BORD</h1>
 
-    <h2 class="text-center mb-3"> - {{ "now" | date("M") | format_date(locale='fr', pattern="MMMM YYYY") | upper }} - </h2>
+    <h2 class="text-center mb-5"> {{ "now" | date("M") | format_date(locale='fr', pattern="MMMM YYYY") | upper }} </h2>
 
     <div class="container mb-5">
         <div class="row">
@@ -45,18 +45,18 @@
         </div>
     </div>
 
-    <h2  class="text-center mb-3">- DERNIERS INSCRITS -</h2>
+    <h2  class="text-center mb-5">DERNIERS INSCRITS</h2>
 
     <div class="row">
         {% for user in lastUsers %}
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="card mb-4 shadow-sm">
                 <div class="card-body">
-                    <h5>{{ user.nom | upper }} {{ user.prenom }} </h5>
+                    <h5 class="text-center">{{ user.nom | upper }} {{ user.prenom }} </h5>
                     <p>Le {{ user.createdAt | date('d M Y') | format_date(locale='fr') }} à {{ user.createdAt | date('H:i') }}</p>
                     <h6>"{{ user.profil.nom }}"</h6>
                     <div class="d-flex justify-content-sm-end">
-                        <a class="btn btn-primary" href ={{  path('singleProfil', {idProfil:user.profil.id, idUser:user.id}) }}>Fiche</a>
+                        <a class="btn btn-primary" href ={{  path('singleProfil', {idProfil:user.profil.id, idUser:user.id}) }}>Voir la fiche</a>
                     </div>
                 </div>
             </div>
