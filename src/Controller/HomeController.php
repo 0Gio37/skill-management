@@ -81,15 +81,14 @@ class HomeController extends AbstractController
      */
     public function showCollabModif(): Response
     {
-
         $currentDate = new \DateTime('now');
         $currentMonth= $currentDate->format(('m'));
         $tbCollabModification = [];
         $listUsers = $this->entityManager->getRepository(User::class)->findAll();
         foreach ($listUsers as $el)
         {
-            if ($el->getCreatedAt() != $el->getUpdatedAt() && $el->getcreatedAt()->format('m'
-                ) === $currentMonth && $el->getProfil()->getNom() === "Collaborateur") {
+            if($el->getCreatedAt() != $el->getUpdatedAt() && $el->getUpdatedAt()->format('m') === $currentMonth && $el->getProfil()->getNom() === "Collaborateur")
+            {
                 array_push($tbCollabModification, $el);
             }
         }

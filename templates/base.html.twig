@@ -28,25 +28,24 @@
             {% include 'myComponents/nav.html.twig' %}
         </header>
 
-        <div class="main">
+        <main class="main">
             <aside class="aside-bar">
-
                     {% include'myComponents/aside.html.twig' %}
-
             </aside>
-        <section class="content">
-            {% for type, messages in app.flashes %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ type }}">
-                        {{ message }}
-                    </div>
+            <section class="content border-start border-dark ps-4">
+                {% for type, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ type }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
                 {% endfor %}
-            {% endfor %}
 
-            {% block body %}{% endblock %}
-        </section>
-    {% endif %}
-        </div>
+                {% block body %}{% endblock %}
+            </section>
+        {% endif %}
+        </main>
+
         <footer class="footer text-warning bg-dark">
             {% include 'myComponents/footer.html.twig' %}
         </footer>
