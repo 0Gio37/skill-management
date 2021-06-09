@@ -6,8 +6,7 @@
 
     <h1>MODIFIER UNE MISSION</h1>
 
-    <a href ={{  path('singleProfilMissions', {idUser:idUser,idProfil:modifUserMission.user.profil.id}) }}>Retour aux missions</a>
-
+{#
     {{ form_start(modifUserMissionForm) }}
     {{ form_row(modifUserMissionForm.company) }}
     {{ form_row(modifUserMissionForm.descirptif) }}
@@ -16,7 +15,26 @@
     {{ form_row(modifUserMissionForm.en_cours) }}
     <button class="btn btn-primary">Modifier</button>
     {{ form_end(modifUserMissionForm) }}
+#}
 
+    <div class="border-bottom mt-5 mb-5">
+        {{ form_start(modifUserMissionForm) }}
+        <div class="mt-3 mb-3 d-flex justify-content-between">
+            <label>Entreprise {{ form_row(modifUserMissionForm.company) }}</label>
+            {{ form_row(modifUserMissionForm.debut) }}
+            {{ form_row(modifUserMissionForm.fin) }}
+            {{ form_row(modifUserMissionForm.en_cours) }}
+        </div>
+        <div class="mt-3 mb-3">
+            <label class="w-100">Descriptif{{ form_row(modifUserMissionForm.descirptif) }}</label>
+        </div>
+        <button class="d-flex ms-auto btn btn-primary btn-sm mb-3">Modifier</button>
+        {{ form_end(modifUserMissionForm) }}
+    </div>
+
+    <a class="text-decoration-none" href= {{ path('singleProfilMissions', {idUser:idUser,idProfil:modifUserMission.user.profil.id})  }}>
+        <button class="btn-sm btn btn-secondary">Annuler</button>
+    </a>
 {% endblock %}
 
 
