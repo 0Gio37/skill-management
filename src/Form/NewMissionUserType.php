@@ -8,6 +8,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,18 +21,22 @@ class NewMissionUserType extends AbstractType
             ->add('company', EntityType::class, [
                 'class'=>Company::class,
                 'choice_label'=>'nom',
-                'label'=> 'Entreprise',
+                'label'=> ' ',
                 'required'=>true
             ])
-            ->add('descirptif', TextType::class, [
-                'label'=> 'Descriptif'
+            ->add('descirptif', TextareaType::class, [
+                'label'=> ' ',
+                'attr'=>[
+                    'style' => 'width:100%',
+                    'rows' => 5
+                ]
             ])
             ->add('debut', DateType::class, [
-                'label'=> 'Date de début',
+                'label'=> 'Début ',
                  'required'=>true
             ])
             ->add('fin', DateType::class, [
-                'label'=> 'Date de fin',
+                'label'=> 'Fin ',
                 'required'=>true
             ])
             ->add('en_cours', ChoiceType::class, [
@@ -39,7 +44,7 @@ class NewMissionUserType extends AbstractType
                     'non'=>false,
                     'oui'=>true
                 ],
-                'label'=> 'Mission toujours en cours ?',
+                'label'=> 'En cours ',
                 'required'=>true,
                 'multiple'=>false,
                 'expanded' => true
