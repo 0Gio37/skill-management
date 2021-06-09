@@ -19,8 +19,11 @@
 
     <div class="border-bottom mt-5 mb-5">
         {{ form_start(modifUserMissionForm) }}
-        <div class="mt-3 mb-3 d-flex justify-content-between">
-            <label>Entreprise {{ form_row(modifUserMissionForm.company) }}</label>
+        <div class="mt-3 mb-3 d-flex justify-content-around">
+            <h5> - {{ modifUserMission.company.nom }}</h5>
+            <div class="d-none">
+                <p>{{ form_row(modifUserMissionForm.company) }}</p>
+            </div>
             {{ form_row(modifUserMissionForm.debut) }}
             {{ form_row(modifUserMissionForm.fin) }}
             {{ form_row(modifUserMissionForm.en_cours) }}

@@ -80,9 +80,9 @@ class HomeController extends AbstractController
     /**
      * @Route ("/profil/{idUser}/{idProfil}", name="singleProfil")
      */
+    /*
     public function singleProfil(int $idUser, $idProfil): Response
     {
-
         $oneProfil = $this->entityManager->getRepository(User::class)->findOneBy(["id"=>$idUser]);
         $prof = $this->entityManager->getRepository(Profil::class)->findOneBy(["id"=>$idProfil]);
 
@@ -93,6 +93,7 @@ class HomeController extends AbstractController
             "idUser"=>$idUser
             ]);
     }
+*/
 
     /**
      * @Route ("/missions/{idUser}", name="singleProfilMissions")

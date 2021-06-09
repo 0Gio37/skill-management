@@ -24,7 +24,11 @@ class AddUserType extends AbstractType
                     'email',
                     EmailType::class,
                     [
-                        'required' => true
+                        'required' => true,
+                        'label'=>" ",
+                        'attr'=>[
+                            'style' => 'width:75%'
+                        ]
                     ]
                 )
                 ->add(
@@ -36,6 +40,7 @@ class AddUserType extends AbstractType
                             'Structure' => "ROLE_STRUCTURE",
                             'Utilisateur' => "ROLE_USER"
                         ],
+                        'label'=>"Role",
                         'required' => true,
                         'multiple' => true,
                         'expanded' => true
@@ -49,10 +54,18 @@ class AddUserType extends AbstractType
                         'invalid_message' => 'le mot de passe et la confirmation doivent être identique',
                         'required' => true,
                         'first_options' => [
-                            'label' => 'Password'
+                            'label' => ' ',
+                             'attr'=>[
+                                 'placeholder'=>'password',
+                                 'style' => 'width:80%'
+            ]
                         ],
                         'second_options' => [
-                            'label' => 'confirmer le password'
+                            'label' => ' ',
+                            'attr'=>[
+                                'placeholder'=>'confirmer le password',
+                                'style' => 'width:80%'
+                                ]
                         ]
                     ]
                 )
@@ -61,6 +74,10 @@ class AddUserType extends AbstractType
                     TextType::class,
                     [
                         'required' => true,
+                        'label'=>" ",
+                        'attr'=>[
+                            'style' => 'width:75%'
+                        ]
                     ]
                 )
                 ->add(
@@ -68,6 +85,10 @@ class AddUserType extends AbstractType
                     TextType::class,
                     [
                         'required' => true,
+                        'label'=>" ",
+                        'attr'=>[
+                            'style' => 'width:75%'
+                            ]
                     ]
                 )
                 ->add(
@@ -76,6 +97,10 @@ class AddUserType extends AbstractType
                     [
 
                         'required' => true,
+                        'label'=>" ",
+                        'attr'=>[
+                            'style' => 'width:75%'
+                        ]
                     ]
                 )
                 ->add(
@@ -83,6 +108,10 @@ class AddUserType extends AbstractType
                     TextType::class,
                     [
                         'required' => true,
+                        'label'=>" ",
+                        'attr'=>[
+                            'style' => 'width:75%'
+                        ]
                     ]
                 )
                 ->add(
@@ -91,6 +120,10 @@ class AddUserType extends AbstractType
                     [
 
                         'required' => true,
+                        'label'=>" ",
+                        'attr'=>[
+                            'style' => 'width:75%'
+                        ]
                     ]
                 )
                 ->add(
@@ -98,6 +131,10 @@ class AddUserType extends AbstractType
                     TextType::class,
                     [
                         'required' => true,
+                        'label'=>" ",
+                        'attr'=>[
+                            'style' => 'width:75%'
+                        ]
                     ]
                 )
                 ->add(
@@ -106,8 +143,9 @@ class AddUserType extends AbstractType
                     [
                         'choices' => [
                             'Dans la société' => true,
-                            'A quitté la société' => false
-                        ]
+                            'Hors société' => false
+                        ],
+                        'label'=>" "
                     ]
                 )
                 ->add(
@@ -116,6 +154,7 @@ class AddUserType extends AbstractType
                     [
                         'class' => Profil::class,
                         'choice_label' => 'nom',
+                        'label'=>" "
                     ]
                 )
         ;} else {
@@ -125,6 +164,7 @@ class AddUserType extends AbstractType
                     TextType::class,
                     [
                         'required' => true,
+                        'label'=>" "
                     ]
                 )
                 ->add(
@@ -132,6 +172,7 @@ class AddUserType extends AbstractType
                     TextType::class,
                     [
                         'required' => true,
+                        'label'=>" "
                     ]
                 )
                 ->add(
@@ -139,6 +180,7 @@ class AddUserType extends AbstractType
                     TextType::class,
                     [
                         'required' => true,
+                        'label'=>" "
                     ]
                 )
                 ->add(
@@ -146,6 +188,7 @@ class AddUserType extends AbstractType
                     TextType::class,
                     [
                         'required' => true,
+                        'label'=>" "
                     ]
                 )
                 ->add(
@@ -154,6 +197,7 @@ class AddUserType extends AbstractType
                     [
 
                         'required' => true,
+                        'label'=>" "
                     ]
                 )
                 ->add(
@@ -161,6 +205,7 @@ class AddUserType extends AbstractType
                     TextType::class,
                     [
                         'required' => true,
+                        'label'=>" "
                     ]
                 );
         }

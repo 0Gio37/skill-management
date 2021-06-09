@@ -5,43 +5,43 @@
 {% block body %}
 
 
-    <h1>GESTION DES CANDIDATS</h1>
+    <h1 xmlns="http://www.w3.org/1999/html">GESTION DES CANDIDATS</h1>
 
-    <h2>Ajouter un candidat</h2>
-    <div>
+    <div class="border-top border-bottom mt-5 mb-5">
         {{ form_start(formNewCandidate) }}
-        <div>
-            {{ form_row(formNewCandidate.nom) }}
-            {{ form_row(formNewCandidate.prenom) }}
-            {{ form_row(formNewCandidate.email) }}
-            {{ form_row(formNewCandidate.password) }}
+        <div class="mt-3 mb-3 d-flex">
+            <label class="w-100">Nom{{ form_row(formNewCandidate.nom) }}</label>
+            <label class="w-100">Prenom{{ form_row(formNewCandidate.prenom) }}</label>
+            <label class="w-100">Téléphone{{ form_row(formNewCandidate.telephone) }}</label>
         </div>
-        <div>
-            {{ form_row(formNewCandidate.adresse) }}
-            {{ form_row(formNewCandidate.cp) }}
-            {{ form_row(formNewCandidate.ville) }}
-            {{ form_row(formNewCandidate.telephone) }}
+        <div class="mt-3 mb-3 d-flex">
+            <label class="w-100">Adresse {{ form_row(formNewCandidate.adresse) }}</label>
+            <label class="w-100">Code Postal {{ form_row(formNewCandidate.cp) }}</label>
+            <label class="w-100">Ville{{ form_row(formNewCandidate.ville) }}</label>
         </div>
-        <div>
-            {{ form_row(formNewCandidate.etat) }}
-            {{ form_row(formNewCandidate.profil) }}
-            {{ form_row(formNewCandidate.roles) }}
+        <div class="mt-3 mb-3 d-flex">
+            <label class="w-100">Etat{{ form_row(formNewCandidate.etat) }}</label>
+            <label class="w-100">Profil{{ form_row(formNewCandidate.profil) }}</label>
+            <label class="w-100">{{ form_row(formNewCandidate.roles) }}</label>
         </div>
-        <button class="btn btn-primary">Ajouter</button>
+        <div class="mt-3 mb-3 d-flex justify-content-center">
+        <label class="text-center w-50">Email {{ form_row(formNewCandidate.email) }}</label>
+        </div>
+        <div class="mt-3 mb-3">
+        <label class="d-flex justify-content-center w-100">{{ form_row(formNewCandidate.password) }}</label>
+        </div>
+        <button class="d-flex ms-auto btn btn-primary btn-sm mb-3">Ajouter un Candidat</button>
         {{ form_end(formNewCandidate) }}
     </div>
-
 
 
     <h2>Liste des Candidats</h2>
     {% for user in  candidateList %}
         {% if user.profil.nom == 'Candidat' %}
-        <ul>
             <li>{{ user.nom | upper }} {{ user.prenom }}</li>
-            <li><a href ={{ path('singleProfil', {idProfil:user.profil.id, idUser:user.id}) }}>Voir le profil</a></li>
+            <li><a href ={{ path('singleProfilMissions', {idProfil:user.profil.id, idUser:user.id}) }}>Voir le profil</a></li>
               <li><a href= {{ path('modifCandidate', {idUser : user.id, idProfil:user.profil.id})  }}>Modifier</a></li>
             <li><a href= {{ path('suppCandidate', {idUser : user.id})  }}>Supprimer</a></li>
-        </ul>
         {% endif %}
     {% endfor %}
 

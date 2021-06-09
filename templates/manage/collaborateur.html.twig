@@ -38,7 +38,7 @@
         {% if user.profil.nom == 'Collaborateur' %}
         <ul>
             <li>{{ user.nom | upper }} {{ user.prenom }}</li>
-            <li><a href ={{ path('singleProfil', {idProfil:user.profil.id, idUser:user.id}) }}>Voir le profil</a></li>
+            <li><a href ={{ path('singleProfilMissions', {idProfil:user.profil.id, idUser:user.id}) }}>Voir le profil</a></li>
             <li><a href= {{ path('modifCollaborateur', {idUser : user.id, idProfil:user.profil.id})  }}>Modifier</a></li>
             <li><a href= {{ path('suppCollaborateur', {idUser : user.id})  }}>Supprimer</a></li>
         </ul>
