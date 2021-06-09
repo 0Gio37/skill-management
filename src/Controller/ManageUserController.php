@@ -66,7 +66,7 @@ class ManageUserController extends AbstractController
             if($modifCandidate->getRoles() === "ROLE_ADMIN" ){
                 return $this->redirectToRoute('manageCandidate');
             } else{
-                return $this->redirectToRoute('singleProfil', ['idUser'=>$idUser, 'idProfil'=>$idProfil]);
+                return $this->redirectToRoute('singleProfilMissions', ['idUser'=>$idUser, 'idProfil'=>$idProfil]);
             }
         }
 
@@ -138,7 +138,7 @@ class ManageUserController extends AbstractController
             if($modifCollaborateur->getRoles() === "ROLE_ADMIN" ){
                 return $this->redirectToRoute('manageCollaborateur');
             } else{
-                return $this->redirectToRoute('singleProfil', ['idUser'=>$idUser, 'idProfil'=>$idProfil]);
+                return $this->redirectToRoute('singleProfilMissions', ['idUser'=>$idUser, 'idProfil'=>$idProfil]);
             }
         }
 

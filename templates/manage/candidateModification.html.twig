@@ -12,37 +12,46 @@
     {% endif %}
 
 
-    <div>
+    <div class="border-top border-bottom mt-5 mb-5">
         {{ form_start(modifCandidateForm) }}
-        <div>
-            {{ form_row(modifCandidateForm.nom) }}
-            {{ form_row(modifCandidateForm.prenom) }}
-            {% if is_granted('ROLE_ADMIN') %}
-                {{ form_row(modifCandidateForm.email) }}
-                {{ form_row(modifCandidateForm.password) }}
-            {% endif %}
+        <div class="mt-3 mb-3 d-flex">
+            <label class="w-100">Nom{{ form_row(modifCandidateForm.nom) }}</label>
+            <label class="w-100">Prenom{{ form_row(modifCandidateForm.prenom) }}</label>
+            <label class="w-100">Téléphone{{ form_row(modifCandidateForm.telephone) }}</label>
         </div>
-        <div>
-            {{ form_row(modifCandidateForm.adresse) }}
-            {{ form_row(modifCandidateForm.cp) }}
-            {{ form_row(modifCandidateForm.ville) }}
-            {{ form_row(modifCandidateForm.telephone) }}
+        <div class="mt-3 mb-3 d-flex">
+            <label class="w-100">Adresse {{ form_row(modifCandidateForm.adresse) }}</label>
+            <label class="w-100">Code Postal {{ form_row(modifCandidateForm.cp) }}</label>
+            <label class="w-100">Ville{{ form_row(modifCandidateForm.ville) }}</label>
         </div>
         {% if is_granted('ROLE_ADMIN') %}
-            <div>
-                {{ form_row(modifCandidateForm.etat) }}
-                {{ form_row(modifCandidateForm.profil) }}
-                {{ form_row(modifCandidateForm.roles) }}
+            <div class="mt-3 mb-3 d-flex">
+                <label class="w-100">Etat{{ form_row(modifCandidateForm.etat) }}</label>
+                <label class="w-100">Profil{{ form_row(modifCandidateForm.profil) }}</label>
+                <label class="w-100">{{ form_row(modifCandidateForm.roles) }}</label>
             </div>
         {% endif %}
-        <button class="btn btn-primary">Modifier</button>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="mt-3 mb-3 d-flex justify-content-center">
+                <label class="text-center w-50">Email {{ form_row(modifCandidateForm.email) }}</label>
+            </div>
+        {% endif %}
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="mt-3 mb-3">
+                <label class="d-flex justify-content-center w-100">{{ form_row(modifCandidateForm.password) }}</label>
+            </div>
+        {% endif %}
+        <button class="d-flex ms-auto btn btn-primary btn-sm mb-3">Modifier</button>
         {{ form_end(modifCandidateForm) }}
     </div>
 
     {% if is_granted('ROLE_ADMIN') %}
-        <a href= {{ path('manageCandidate')  }}><button>Annuler</button></a>
+        <a class="text-decoration-none" href= {{ path('manageCandidate')  }}>
+            <button class="btn-sm btn btn-secondary">Annuler</button>
+        </a>
     {% else %}
-        <a href ={{  path('singleProfil', {idProfil:currentIdProfil, idUser:currentId}) }}><button>Annuler</button></a>
+        <a class="text-decoration-none" href= {{ path('singleProfilMissions', {idProfil:currentIdProfil, idUser:currentId})  }}>
+            <button class="btn-sm btn btn-secondary">Annuler</button>
+        </a>
     {% endif %}
-
 {% endblock %}
