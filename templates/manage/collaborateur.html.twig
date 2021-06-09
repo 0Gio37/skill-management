@@ -4,47 +4,60 @@
 
 {% block body %}
 
-
     <h1>GESTION DES COLLABORATEURS</h1>
 
-    <h2>Ajouter un collaborateur</h2>
-    <div>
+    <div class="border-top border-bottom mt-5 mb-5">
         {{ form_start(formNewCollaborateur) }}
-        <div>
-            {{ form_row(formNewCollaborateur.nom) }}
-            {{ form_row(formNewCollaborateur.prenom) }}
-            {{ form_row(formNewCollaborateur.email) }}
-            {{ form_row(formNewCollaborateur.password) }}
+        <div class="mt-3 mb-3 d-flex">
+            <label class="w-100">Nom{{ form_row(formNewCollaborateur.nom) }}</label>
+            <label class="w-100">Prenom{{ form_row(formNewCollaborateur.prenom) }}</label>
+            <label class="w-100">Téléphone{{ form_row(formNewCollaborateur.telephone) }}</label>
         </div>
-        <div>
-            {{ form_row(formNewCollaborateur.adresse) }}
-            {{ form_row(formNewCollaborateur.cp) }}
-            {{ form_row(formNewCollaborateur.ville) }}
-            {{ form_row(formNewCollaborateur.telephone) }}
+        <div class="mt-3 mb-3 d-flex">
+            <label class="w-100">Adresse {{ form_row(formNewCollaborateur.adresse) }}</label>
+            <label class="w-100">Code Postal {{ form_row(formNewCollaborateur.cp) }}</label>
+            <label class="w-100">Ville{{ form_row(formNewCollaborateur.ville) }}</label>
         </div>
-        <div>
-            {{ form_row(formNewCollaborateur.etat) }}
-            {{ form_row(formNewCollaborateur.profil) }}
-            {{ form_row(formNewCollaborateur.roles) }}
+        <div class="mt-3 mb-3 d-flex">
+            <label class="w-100">Etat{{ form_row(formNewCollaborateur.etat) }}</label>
+            <label class="w-100">Profil{{ form_row(formNewCollaborateur.profil) }}</label>
+            <label class="w-100">{{ form_row(formNewCollaborateur.roles) }}</label>
         </div>
-        <button class="btn btn-primary">Ajouter</button>
+        <div class="mt-3 mb-3 d-flex justify-content-center">
+            <label class="text-center w-50">Email {{ form_row(formNewCollaborateur.email) }}</label>
+        </div>
+        <div class="mt-3 mb-3">
+            <label class="d-flex justify-content-center w-100">{{ form_row(formNewCollaborateur.password) }}</label>
+        </div>
+        <button class="d-flex ms-auto btn btn-primary btn-sm mb-3">Ajouter un Collaborateur</button>
         {{ form_end(formNewCollaborateur) }}
     </div>
 
-
-
-    <h2>Liste des Collaborateur</h2>
+    <h2 class="mb-3">Répertoire</h2>
     {% for user in  collaborateurList %}
         {% if user.profil.nom == 'Collaborateur' %}
-        <ul>
-            <li>{{ user.nom | upper }} {{ user.prenom }}</li>
-            <li><a href ={{ path('singleProfilMissions', {idProfil:user.profil.id, idUser:user.id}) }}>Voir le profil</a></li>
-            <li><a href= {{ path('modifCollaborateur', {idUser : user.id, idProfil:user.profil.id})  }}>Modifier</a></li>
-            <li><a href= {{ path('suppCollaborateur', {idUser : user.id})  }}>Supprimer</a></li>
-        </ul>
+            <div class="container border-bottom py-3 px-5">
+                <div class="row">
+                    <div class="col-6">
+                        {{ user.nom | upper }} {{ user.prenom }}
+                    </div>
+                    <div class="col text-start">
+                        <a class="text-decoration-none" href ={{ path('singleProfilMissions', {idProfil:user.profil.id, idUser:user.id}) }}>
+                            <button class="d-flex me-auto btn-sm btn btn-outline-primary">Voir le profil</button>
+                        </a>
+                    </div>
+                    <div class="col text-start">
+                        <a class="text-decoration-none" href= {{ path('modifCollaborateur', {idUser : user.id, idProfil:user.profil.id})  }}>
+                            <button class="d-flex me-auto btn-sm btn btn-outline-primary">Modifier</button>
+                        </a>
+                    </div>
+                    <div class="col text-center">
+                        <button class="d-flex ms-auto btn btn-sm">
+                            <a class="text-danger" href={{ path('suppCollaborateur', {idUser : user.id}) }}>Supprimer</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
         {% endif %}
     {% endfor %}
-
-
-
 {% endblock %}

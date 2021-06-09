@@ -40,7 +40,8 @@ class ManageUserController extends AbstractController
             $this->addFlash('success', 'Candidat "' . $data->getNom().' '. $data->getPrenom(). '" créé !');
         }
 
-        $candidateList= $this->entityManager->getRepository(User::class)->findAll();
+        $candidateList= $this->entityManager->getRepository(User::class)->findBy(
+                [], ["nom" => "ASC"], null);
 
         return $this->render('manage/candidate.html.twig',[
             'candidateList'=>$candidateList,
@@ -110,7 +111,8 @@ class ManageUserController extends AbstractController
             $this->addFlash('succes', 'Collaborateur "' . $data->getNom().' '. $data->getPrenom(). '" créé !');
         }
 
-        $collaborateurList= $this->entityManager->getRepository(User::class)->findAll();
+        $collaborateurList= $this->entityManager->getRepository(User::class)->findBy(
+            [], ["nom" => "ASC"], null);
 
         return $this->render('manage/collaborateur.html.twig',[
             'collaborateurList'=>$collaborateurList,

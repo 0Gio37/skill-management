@@ -164,7 +164,10 @@ class AddUserType extends AbstractType
                     TextType::class,
                     [
                         'required' => true,
-                        'label'=>" "
+                        'label'=>" ",
+                        'attr'=>[
+                            'style' => 'width:75%'
+                        ]
                     ]
                 )
                 ->add(
@@ -172,7 +175,10 @@ class AddUserType extends AbstractType
                     TextType::class,
                     [
                         'required' => true,
-                        'label'=>" "
+                        'label'=>" ",
+                        'attr'=>[
+                            'style' => 'width:75%'
+                        ]
                     ]
                 )
                 ->add(
@@ -180,7 +186,10 @@ class AddUserType extends AbstractType
                     TextType::class,
                     [
                         'required' => true,
-                        'label'=>" "
+                        'label'=>" ",
+                        'attr'=>[
+                            'style' => 'width:75%'
+                        ]
                     ]
                 )
                 ->add(
@@ -188,7 +197,10 @@ class AddUserType extends AbstractType
                     TextType::class,
                     [
                         'required' => true,
-                        'label'=>" "
+                        'label'=>" ",
+                        'attr'=>[
+                            'style' => 'width:75%'
+                        ]
                     ]
                 )
                 ->add(
@@ -197,7 +209,10 @@ class AddUserType extends AbstractType
                     [
 
                         'required' => true,
-                        'label'=>" "
+                        'label'=>" ",
+                        'attr'=>[
+                            'style' => 'width:75%'
+                        ]
                     ]
                 )
                 ->add(
@@ -205,7 +220,10 @@ class AddUserType extends AbstractType
                     TextType::class,
                     [
                         'required' => true,
-                        'label'=>" "
+                        'label'=>" ",
+                        'attr'=>[
+                            'style' => 'width:75%'
+                        ]
                     ]
                 );
         }
