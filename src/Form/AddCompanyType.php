@@ -14,10 +14,10 @@ class AddCompanyType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class,[
-                'label'=> false
+                'label'=> 'Nom'
             ])
             ->add('lieu',TextType::class,[
-                'label'=> false
+                'label'=> "Site"
             ])
         ;
     }

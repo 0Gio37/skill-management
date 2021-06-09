@@ -16,12 +16,12 @@ class AddSkillType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class,[
-                'label'=>false
+                'label'=>'Nom'
             ])
             ->add('category', EntityType::class,[
                 'class'=>Category::class,
                 'choice_label'=>'nom',
-                'label'=>false
+                'label'=>'Catégorie'
             ])
         ;
     }

@@ -6,23 +6,32 @@
 
     <h1>GESTION DES CATEGORIES</h1>
 
-    <h2>Ajouter une catégorie</h2>
-    <div>
+    <div class="border-top border-bottom my-5">
         {{ form_start(formNewCat) }}
-        {{ form_row(formNewCat.nom) }}
-        <button class="btn btn-primary">Ajouter</button>
+        <div class="d-flex justify-content-evenly py-5">
+            <div>{{ form_row(formNewCat.nom) }}</div>
+            <div><button class="d-flex ms-auto btn btn-primary btn-sm mb-3">Ajouter une Catégorie</button></div>
+        </div>
         {{ form_end(formNewCat) }}
     </div>
 
-
-    <h2>Liste des catégories</h2>
-    {% for cat in  categoryList %}
-    <ul>
-        <li>{{ cat.nom | upper }}</li>
-        <li><a href= {{ path('modifCategory', {idUser : cat.id})  }}>Modifier</a></li>
-        <li><a href= {{ path('suppCategory', {idUser : cat.id})  }}>Supprimer</a></li>
-    </ul>
+    {% for cat in categoryList %}
+        <div class="container border-bottom py-3 px-5">
+            <div class="row">
+                <div class="col-9">
+                    {{ cat.nom | upper }}
+                </div>
+                <div class="col text-start">
+                    <a class="text-decoration-none" href= {{  path('modifCategory', {idUser : cat.id})   }}>
+                        <button class="d-flex me-auto btn-sm btn btn-outline-primary">Modifier</button>
+                    </a>
+                </div>
+                <div class="col text-center">
+                    <button class="d-flex ms-auto btn btn-sm">
+                        <a class="text-danger" href= {{ path('suppCategory', {idUser : cat.id})  }}>Supprimer</a>
+                    </button>
+                </div>
+            </div>
+        </div>
     {% endfor %}
-
-
 {% endblock %}

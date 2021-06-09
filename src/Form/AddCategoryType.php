@@ -14,7 +14,7 @@ class AddCategoryType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class,[
-                'label'=>false
+                'label'=>'Nom '
             ])
         ;
     }

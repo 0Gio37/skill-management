@@ -103,7 +103,8 @@ class ManageItemsController extends AbstractController
             $this->addFlash('success', 'Entreprise "' . $data->getNom().'" créée !');
         }
 
-        $companyList = $this->entityManager->getRepository(Company::class)->findAll();
+        $companyList = $this->entityManager->getRepository(Company::class)->findBy(
+            [], ["nom" => "ASC"], null);
 
         return $this->render('manage/company.html.twig', [
             'companyList' => $companyList,
