@@ -14,7 +14,10 @@ class SearchByNameType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, [
-                'label' => false
+                'label' => false,
+                'attr'=>[
+                    'style' => 'width:75%',
+                ]
             ])
         ;
     }

@@ -78,24 +78,6 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route ("/profil/{idUser}/{idProfil}", name="singleProfil")
-     */
-    /*
-    public function singleProfil(int $idUser, $idProfil): Response
-    {
-        $oneProfil = $this->entityManager->getRepository(User::class)->findOneBy(["id"=>$idUser]);
-        $prof = $this->entityManager->getRepository(Profil::class)->findOneBy(["id"=>$idProfil]);
-
-        return $this->render('home/profil.html.twig',[
-            "oneProfil" => $oneProfil,
-            "prof" => $prof,
-            "idProfil"=>$idProfil,
-            "idUser"=>$idUser
-            ]);
-    }
-*/
-
-    /**
      * @Route ("/missions/{idUser}", name="singleProfilMissions")
      */
     public function singleProfilMissions(Request $request, int $idUser): Response

@@ -17,7 +17,10 @@ class SearchBySkillType extends AbstractType
             ->add('nom', EntityType::class, [
                 'class'=> Skill::class,
                 'choice_label'=> 'nom',
-                'label' => false
+                'label' => false,
+                'attr'=>[
+                    'style' => 'width:75%'
+                ]
             ])
         ;
     }
