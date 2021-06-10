@@ -28,11 +28,21 @@
     </div>
 
     <div class="mb-4">
-        {%  if not is_granted('ROLE_USER') %}
+        {%  if is_granted('ROLE_STRUCTURE') %}
             {% if oneProfil.etat == true %}
-                <h5>Actuellement dans la société</h5>
+                <h5>Statut</h5>
+                <p>"Actuellement dans la société"</p>
+                <h5>Disponible</h5>
+   {% if diplayDispo is same as(true) %}
+                    <p>Non</p>
+                    {% else %}
+                        <p>Oui</p>
+                {% endif %}
             {% else %}
-                <p>A quitté la société</p>
+                <h5>Statut</h5>
+                <p>"A quitté la société"</p>
+                <h5>Disponible</h5>
+                <p>Non</p>
             {% endif %}
         {% endif %}
     </div>

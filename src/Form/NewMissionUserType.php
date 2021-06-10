@@ -33,10 +33,12 @@ class NewMissionUserType extends AbstractType
             ])
             ->add('debut', DateType::class, [
                 'label'=> 'Début ',
+                 'format'=>'dd MMMM yyyy',
                  'required'=>true
             ])
             ->add('fin', DateType::class, [
                 'label'=> 'Fin ',
+                'format'=>'dd MMMM yyyy',
                 'required'=>true
             ])
             ->add('en_cours', ChoiceType::class, [

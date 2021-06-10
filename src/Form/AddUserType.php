@@ -54,17 +54,15 @@ class AddUserType extends AbstractType
                         'invalid_message' => 'le mot de passe et la confirmation doivent être identique',
                         'required' => true,
                         'first_options' => [
-                            'label' => ' ',
+                            'label' => ' Password',
                              'attr'=>[
-                                 'placeholder'=>'password',
-                                 'style' => 'width:80%'
+                                 'style' => 'width:95%'
             ]
                         ],
                         'second_options' => [
-                            'label' => ' ',
+                            'label' => 'Confirmer',
                             'attr'=>[
-                                'placeholder'=>'confirmer le password',
-                                'style' => 'width:80%'
+                                'style' => 'width:95%'
                                 ]
                         ]
                     ]

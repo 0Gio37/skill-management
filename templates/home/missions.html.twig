@@ -39,11 +39,14 @@
                             {% if ent.id is same as(mission.company.id) %}
                                 <div class="d-flex justify-content-between border-bottom">
                                     <p>ENTREPRISE : {{ ent.nom }}</p>
+                                    {% if  mission.encours is same as(true) %}
+                                        <p class="text-danger">Mission en cours</p>
+                                    {% endif %}
                                     <p>LIEU : {{ ent.lieu }}</p>
                                 </div>
                             {% endif %}
                         {% endfor%}
-                        <p class="text-center text-decoration-underline">MISSION</p>
+                        <p class="text-center text-decoration-underline">DETAILS</p>
                         <p>{{ mission.descirptif }}</p>
                                 <a class="text-decoration-none" href= {{ path('singleProfilMissionModification', {idMission: mission.id, idUser: user.id})   }}>
                                     <button class="d-flex me-auto btn-sm btn btn-outline-primary">Modifier</button>

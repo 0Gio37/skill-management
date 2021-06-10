@@ -2,10 +2,14 @@
     <div>
         COMPTE ADMINISTRATEUR
     </div>
-{% else %}
-    <div>
-        COMPTE UTILISATEUR
-    </div>
+    {% elseif app.user.roles[0] is same as "ROLE_STRUCTURE" %}
+        <div>
+            COMPTE STRUCTURE
+        </div>
+    {% else %}
+        <div>
+            COMPTE UTILISATEUR
+        </div>
 {% endif %}
 
 <div>

@@ -13,9 +13,11 @@
 .alert-success{
     background-color: green;
 }
+
 .alert-info{
     background-color: deepskyblue;
 }
+
 .alert-alert{
     background-color: red;
 }
@@ -37,22 +39,18 @@
     position: sticky;
     top: 20px;
 }
-
 section{
     min-height: 100vh;
 }
 
+
 .footer{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding-right: 2%;
-    padding-left: 2%;
     height: 50px;
-    display: flex;
-    justify-content: space-between;
 }
+
+
+
+
 
 
 

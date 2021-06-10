@@ -87,9 +87,14 @@ class HomeController extends AbstractController
         $addMissionlUserForm = $this->createForm(NewMissionUserType::class, $addMissionlUser);
         $addMissionlUserForm->handleRequest($request);
 
-        /*test ajout du single profil include*/
         $prof = $user-> getProfil()->getId();
 
+        $dispo = $this->entityManager->getRepository(Mission::class)->findBy(["user"=>$idUser], ["en_cours"=>"DESC"], 1);;
+        if (empty($dispo)){
+            $diplayDispo = false;
+        } else {
+            $diplayDispo = $dispo[0]->getEnCours();
+        }
 
         if($addMissionlUserForm->isSubmitted() && $addMissionlUserForm->isValid())
         {
@@ -110,9 +115,9 @@ class HomeController extends AbstractController
             'listEntreprise' => $listEntreprise,
             'user'=>$user,
             'idUser'=>$idUser,
-            /*test ajout du single profil include*/
             'oneProfil'=>$user,
-           'idProfil'=> $prof
+            'idProfil'=> $prof,
+            'diplayDispo'=>$diplayDispo
         ]);
     }
 
@@ -171,8 +176,10 @@ class HomeController extends AbstractController
         $addSkillUserForm = $this->createForm(NewSkillUserType::class, $addSkillUser);
         $addSkillUserForm->handleRequest($request);
 
-        /*test ajout du single profil include*/
         $prof = $user-> getProfil()->getId();
+
+        $dispo = $this->entityManager->getRepository(Mission::class)->findBy(["user"=>$idUser], ["en_cours"=>"DESC"], 1);;
+        $diplayDispo = $dispo[0]->getEnCours();
 
         if($addSkillUserForm->isSubmitted() && $addSkillUserForm->isValid())
         {
@@ -196,7 +203,8 @@ class HomeController extends AbstractController
             'idUser'=>$idUser,
             /*test ajout du single profil include*/
             'oneProfil'=>$user,
-            'idProfil'=> $prof
+            'idProfil'=> $prof,
+            'diplayDispo'=>$diplayDispo
         ]);
     }
 
