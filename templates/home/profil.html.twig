@@ -1,20 +1,4 @@
-{#
-{% extends 'base.html.twig' %}
-
-{% block title %}Single Profil{% endblock %}
-
-
-{% block body %}
-
-#}
-
-
-{#
-        <h4><a href ={{  path('singleProfilMissions', {idUser:oneProfil.id,idProfil:idProfil}) }}>Missions</a></h4>
-        <h4><a href ={{  path('singleProfilSkills', {idUser:oneProfil.id,idProfil:idProfil}) }}>Compétences</a></h4>
-#}
-
-    <h1 class="text-center mb-3">{{ oneProfil.nom | upper }} {{ oneProfil.prenom }}</h1>
+ <h1 class="text-center mb-3">{{ oneProfil.nom | upper }} {{ oneProfil.prenom }}</h1>
 
     <h4 class="text-center text-warning mb-5"> - {{ oneProfil.profil.nom | upper}} - </h4>
 

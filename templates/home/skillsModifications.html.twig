@@ -6,17 +6,6 @@
 
     <h1>MODIFIER UNE COMPETENCE</h1>
 
-
-
-{#
-    {{ form_start(modifUserSkillForm) }}
-    {{ form_row(modifUserSkillForm.skill) }}
-    {{ form_row(modifUserSkillForm.expertise) }}
-    {{ form_row(modifUserSkillForm.prefer) }}
-    <button class="btn btn-primary">Modifier</button>
-    {{ form_end(modifUserSkillForm) }}
-#}
-
     <div class="border-bottom mt-5 mb-5">
         {{ form_start(modifUserSkillForm) }}
         <div class="mt-3 mb-3 d-flex justify-content-around">
@@ -34,7 +23,6 @@
     <a class="text-decoration-none" href= {{ path('singleProfilSkills', {idUser:idUser,idProfil:modifUserSkill.user.profil.id})  }}>
         <button class="btn-sm btn btn-secondary">Annuler</button>
     </a>
-
 
 {% endblock %}
 

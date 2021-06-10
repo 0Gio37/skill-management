@@ -13,12 +13,6 @@
                 <button class="btn-light rounded-top border-0 ps-5 pe-5"><a class="text-primary text-decoration-none" href ={{  path('singleProfilMissions', {idUser:oneProfil.id,idProfil:idProfil}) }}> Missions </a></button>
                 <button class="fw-bolder me-4 bg-light text-primary btn-primary rounded border-end-0 border-start-0 ps-4 pe-4" disabled> Compétences </button>
             </div>
-            {#
-            <h1>LISTE DES MISSIONS de {{ user.prenom }} {{ user.nom | upper }} </h1>
-
-              <p><a href={{ path('singleProfil', {idUser: user.id,idProfil:user.profil.id}) }}>Retour au Profil</a></p>
-            #}
-            {#  <h2>Ajouter une compétence</h2>#}
 
             <div class="border-top border-bottom mb-4">
                 {{ form_start(addSkillUserForm) }}

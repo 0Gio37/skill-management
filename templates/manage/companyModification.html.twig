@@ -8,12 +8,19 @@
 
     <h2>Renseigner les nouvelles valeurs</h2>
 
-    {{ form_start(modifCompForm) }}
-    {{ form_row(modifCompForm.nom) }}
-    {{ form_row(modifCompForm.lieu) }}
-    <button class="btn btn-primary">Modifier</button>
-    {{ form_end(modifCompForm) }}
+    <div class="border-top border-bottom my-5">
+        {{ form_start(modifCompForm) }}
+        <div class="d-flex justify-content-evenly py-5">
+            <div>{{ form_row(modifCompForm.nom) }}</div>
+            <div>{{ form_row(modifCompForm.lieu) }}</div>
+            <div><button class="btn btn-primary">Modifier</button></div>
+        </div>
+        {{ form_end(modifCompForm) }}
+    </div>
 
-    <a href= {{ path('manageCompany')  }}><button>Annuler</button></a>
+    <a class="text-decoration-none" href= {{ path('manageCompany')  }}>
+        <button class="btn-sm btn btn-secondary">Annuler</button>
+    </a>
+
 
 {% endblock %}
