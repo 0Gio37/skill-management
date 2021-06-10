@@ -16,11 +16,14 @@
     <body class="bg-light">
     {% if (app.user.profil.nom is not same as('Structure')) and (idUser is not same as(app.user.id)) %}
         <div>
-            <h1>ACTION INTERDITE !</h1>
-            <p>Veuillez cliquer sur le lien suivant afin de vous identifier : </p>
-        </div>
-        <div>
-            <a href="{{ path('app_logout') }}">Saisir mes identifiants de connexion</a>
+            <div class="py-5">
+                <div class="border shadow border-3 border-danger rounded-3 mt-5 ms-auto me-auto w-50 px-5 py-4" method="post">
+                    <h1 class="mb-5 font-weight-normal text-center">ACTION INTERDITE !</h1>
+                    <a class="text-decoration-none" href= {{ path('app_logout') }}>
+                        <button class="btn-sm btn d-flex ms-auto me-auto btn-danger">Resaisir mes identifiants de connexion</button>
+                    </a>
+                </div>
+            </div>
         </div>
 
     {% else %}

@@ -28,6 +28,7 @@
                 {{ form_end(addMissionlUserForm) }}
             </div>
 
+            <h3 class="mb-5">Historique</h3>
             {% for mission in  missionProfil  %}
                 <h6>{{ mission.debut | format_date(locale='fr', pattern=" dd MMMM YYYY") }} AU {{ mission.fin | format_date(locale='fr', pattern=" dd MMMM YYYY") }}</h6>
                 <div class="row mb-5">

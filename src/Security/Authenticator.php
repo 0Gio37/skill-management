@@ -99,7 +99,7 @@ class Authenticator extends AbstractFormLoginAuthenticator implements PasswordAu
         if(in_array('ROLE_USER', $token->getRoleNames())){
             $currentProfilId = $token->getUser()->getProfil()->getId();
             $currentUserId = $token->getUser()->getId();
-            return new RedirectResponse($this->urlGenerator->generate('singleProfil', ['idProfil'=>$currentProfilId,'idUser'=>$currentUserId]));
+            return new RedirectResponse($this->urlGenerator->generate('singleProfilMissions', ['idProfil'=>$currentProfilId,'idUser'=>$currentUserId]));
         }
 
         return new RedirectResponse($this->urlGenerator->generate('home'));

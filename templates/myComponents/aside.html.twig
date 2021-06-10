@@ -12,12 +12,12 @@
         </ul>
 
     {% elseif app.user.roles[0] is same as "ROLE_STRUCTURE" %}
-    <div class="bg-warning text-dark">
+    <div class="bg-warning text-dark text-center mb-3 shadow rounded">
         Suivi des profils
     </div>
 
     {% else %}
-    <div class="bg-warning text-dark">
+    <div class="bg-warning text-dark text-center mb-3 shadow rounded">
         Votre espace personnel
     </div>
     {% endif %}
