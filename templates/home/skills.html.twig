@@ -36,8 +36,39 @@
                                     <div class="col-sm-4">
                                         <div class="card mb-2 shadow-sm">
                                             <div class="card-body">
-                                                <h6 class="text-center">{{ comp.nom }}</h6>
-                                                <p>{{ competence.expertise.niveau }}</p>
+                                                <h6 class="text-center mb-4">{{ comp.nom }}</h6>
+                                                {% if competence.expertise.niveau is same as 'En formation' %}
+                                                    <p>{{ competence.expertise.niveau }} :
+                                                        <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
+                                                    </p>
+                                                    {% elseif competence.expertise.niveau is same as 'Connaisant les bases' %}
+                                                    <p>{{ competence.expertise.niveau }} :
+                                                        <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
+                                                        <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
+                                                    </p>
+                                                    {% elseif competence.expertise.niveau is same as 'Niveau avancé' %}
+                                                        <p>{{ competence.expertise.niveau }} :
+                                                            <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
+                                                            <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
+                                                            <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
+                                                        </p>
+                                                    {% elseif competence.expertise.niveau is same as 'Niveau Confirmé' %}
+                                                        <p>{{ competence.expertise.niveau }} :
+                                                            <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
+                                                            <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
+                                                            <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
+                                                            <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
+                                                        </p>
+                                                    {% else %}
+                                                        <p>{{ competence.expertise.niveau }} :
+                                                            <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
+                                                            <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
+                                                            <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
+                                                            <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
+                                                            <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
+                                                        </p>
+                                                {% endif %}
+
                                                 {% if competence.prefer == true %}
                                                     <p>Favorite : Oui</p>
                                                 {% else %}

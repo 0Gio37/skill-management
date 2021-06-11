@@ -179,7 +179,11 @@ class HomeController extends AbstractController
         $prof = $user-> getProfil()->getId();
 
         $dispo = $this->entityManager->getRepository(Mission::class)->findBy(["user"=>$idUser], ["en_cours"=>"DESC"], 1);;
-        $diplayDispo = $dispo[0]->getEnCours();
+        if (empty($dispo)){
+            $diplayDispo = false;
+        } else {
+            $diplayDispo = $dispo[0]->getEnCours();
+        }
 
         if($addSkillUserForm->isSubmitted() && $addSkillUserForm->isValid())
         {
