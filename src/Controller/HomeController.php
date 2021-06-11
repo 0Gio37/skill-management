@@ -201,7 +201,6 @@ class HomeController extends AbstractController
             'listCategory'=> $listCategory,
             'user'=>$user,
             'idUser'=>$idUser,
-            /*test ajout du single profil include*/
             'oneProfil'=>$user,
             'idProfil'=> $prof,
             'diplayDispo'=>$diplayDispo
