@@ -2,34 +2,45 @@
 
 {% block body %}
 
+    {% set diplayResult = false %}
+
     {% if skillLevelSearched is defined %}
 
-        <h1>Résultat de la recherche pour un niveau "{{ skillLevelSearched.niveau.niveau }}" dans la compétence "{{skillLevelSearched.nom.nom }}</h1>
+        <h1>Résultat de "{{ skillLevelSearched.niveau.niveau }}" sur la compétence "{{skillLevelSearched.nom.nom }}"</h1>
 
-        {% for el in LienUserSkill %}
-            {% if skillLevelSearched.nom.id == el.skill.id and skillLevelSearched.niveau.id == el.expertise.id %}
-                {% for user in listUser %}
-                    {%  if user.id == el.user.id %}
-                        <li><a href ={{  path('singleProfil', {idProfil:user.profil.id, idUser:user.id}) }}>{{ user.nom | upper }} {{ user.prenom }}</a></li>
-                    {% endif %}
-                {% endfor %}
+        <div class="my-5">
+            {% for el in LienUserSkill %}
+                {% if skillLevelSearched.nom.id == el.skill.id and skillLevelSearched.niveau.id == el.expertise.id %}
+                    {% for user in listUser %}
+                        {%  if user.id == el.user.id %}
+                            <div class="py-3 border-bottom"><a href ={{  path('singleProfilMissions', {idProfil:user.profil.id, idUser:user.id}) }}>{{ user.nom | upper }} {{ user.prenom }}</a></div>
+                            {%  set  diplayResult = true %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+            {% if diplayResult == false %}
+                <div class="py-5 border-bottom border-top">Aucune Correspondance ! </div>
             {% endif %}
-        {% endfor %}
+        </div>
 
-        <a href={{ path('searchBySkillLevel') }}>Lancer une nouvelle recherche</a>
-
+        <a href={{ path('searchBySkillLevel') }}>
+            <button class="d-flex ms-auto me-auto btn btn-primary mb-3">Lancer une nouvelle recherche</button>
+        </a>
 
     {% else %}
 
-        <h1>Recherche avancée par NIVEAU de COMPETENCE</h1>
+        <h1>Recherche un niveau de compétence : </h1>
 
-        {{ form_start(formSearchBySkillLevel) }}
-        {{ form_row(formSearchBySkillLevel.niveau) }}
-        {{ form_row(formSearchBySkillLevel.nom) }}
-        <button>Afficher</button>
-        {{ form_end(formSearchBySkillLevel) }}
+        <div class="border-top border-bottom my-5">
+            {{ form_start(formSearchBySkillLevel) }}
+            <div class="d-flex justify-content-center py-5">
+                <div class="w-50">{{ form_row(formSearchBySkillLevel.niveau) }}</div>
+                <div class="w-50">{{ form_row(formSearchBySkillLevel.nom) }}</div>
+                <div><button class="btn btn-sm btn-primary">Afficher</button></div>
+            </div>
+            {{ form_end(formSearchBySkillLevel) }}
+        </div>
 
    {% endif%}
-
-
 {% endblock %}

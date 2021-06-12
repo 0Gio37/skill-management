@@ -71,49 +71,10 @@ class HomeController extends AbstractController
             "sumNewCandidCurrentMonth"=>$sumNewCandidCurrentMonth,
             "sumTbCollabModification"=>$sumTbCollabModification,
             "tbCollabModification"=>$tbCollabModification,
+            "tbCollabCurrentMonth"=>$tbCollabCurrentMonth,
+            "tbCandidCurrentMonth"=>$tbCandidCurrentMonth,
             "test"=>"test"
         ]);
-    }
-
-    /**
-     * @Route("/showCollabModif", name="showCollabModif")
-     * @IsGranted("ROLE_STRUCTURE")
-     */
-    public function showCollabModif(): Response
-    {
-
-        $currentDate = new \DateTime('now');
-        $currentMonth= $currentDate->format(('m'));
-        $tbCollabModification = [];
-        $listUsers = $this->entityManager->getRepository(User::class)->findAll();
-        foreach ($listUsers as $el)
-        {
-            if ($el->getCreatedAt() != $el->getUpdatedAt() && $el->getcreatedAt()->format('m'
-                ) === $currentMonth && $el->getProfil()->getNom() === "Collaborateur") {
-                array_push($tbCollabModification, $el);
-            }
-        }
-        return $this->render('home/showCollabModif.html.twig',[
-            "tbCollabModification"=>$tbCollabModification
-        ]);
-    }
-
-
-    /**
-     * @Route ("/profil/{idUser}/{idProfil}", name="singleProfil")
-     */
-    public function singleProfil(int $idUser, $idProfil): Response
-    {
-
-        $oneProfil = $this->entityManager->getRepository(User::class)->findOneBy(["id"=>$idUser]);
-        $prof = $this->entityManager->getRepository(Profil::class)->findOneBy(["id"=>$idProfil]);
-
-        return $this->render('home/profil.html.twig',[
-            "oneProfil" => $oneProfil,
-            "prof" => $prof,
-            "idProfil"=>$idProfil,
-            "idUser"=>$idUser
-            ]);
     }
 
     /**
@@ -126,12 +87,23 @@ class HomeController extends AbstractController
         $addMissionlUserForm = $this->createForm(NewMissionUserType::class, $addMissionlUser);
         $addMissionlUserForm->handleRequest($request);
 
+        $prof = $user-> getProfil()->getId();
+
+        $dispo = $this->entityManager->getRepository(Mission::class)->findBy(["user"=>$idUser], ["en_cours"=>"DESC"], 1);;
+        if (empty($dispo)){
+            $diplayDispo = false;
+        } else {
+            $diplayDispo = $dispo[0]->getEnCours();
+        }
+
         if($addMissionlUserForm->isSubmitted() && $addMissionlUserForm->isValid())
         {
             $addMissionlUser->setUser($user);
             $data = $addMissionlUserForm->getData();
             $this->entityManager->persist($data);
             $this->entityManager->flush();
+
+            $this->addFlash('success', 'Mission ajoutée !');
         }
 
         $missionProfil = $this->entityManager->getRepository(Mission::class)->findBy(["user"=>$idUser],["debut"=>"DESC"]);
@@ -142,7 +114,10 @@ class HomeController extends AbstractController
             'missionProfil' => $missionProfil,
             'listEntreprise' => $listEntreprise,
             'user'=>$user,
-            'idUser'=>$idUser
+            'idUser'=>$idUser,
+            'oneProfil'=>$user,
+            'idProfil'=> $prof,
+            'diplayDispo'=>$diplayDispo
         ]);
     }
 
@@ -163,7 +138,7 @@ class HomeController extends AbstractController
 
             $this->entityManager->flush();
 
-            $this->addFlash('modification', 'Modification effectuée avec succès');
+            $this->addFlash('info', 'Modification effectuée !');
             return $this->redirectToRoute('singleProfilMissions', ['idUser'=>$idUser]);
         }
 
@@ -185,7 +160,7 @@ class HomeController extends AbstractController
         $item->remove($suppUserMission);
         $item->flush();
 
-        $this->addFlash('suppresion', 'Suppression de la mission effectuée avec succès');
+        $this->addFlash('alert', 'Mission supprimée !');
 
         return $this->redirectToRoute('singleProfilMissions', ['idUser'=>$idUser]);
     }
@@ -201,12 +176,22 @@ class HomeController extends AbstractController
         $addSkillUserForm = $this->createForm(NewSkillUserType::class, $addSkillUser);
         $addSkillUserForm->handleRequest($request);
 
+        $prof = $user-> getProfil()->getId();
+
+        $dispo = $this->entityManager->getRepository(Mission::class)->findBy(["user"=>$idUser], ["en_cours"=>"DESC"], 1);;
+        if (empty($dispo)){
+            $diplayDispo = false;
+        } else {
+            $diplayDispo = $dispo[0]->getEnCours();
+        }
+
         if($addSkillUserForm->isSubmitted() && $addSkillUserForm->isValid())
         {
             $addSkillUser->setUser($user);
             $data = $addSkillUserForm->getData();
             $this->entityManager->persist($data);
             $this->entityManager->flush();
+            $this->addFlash('success', 'Compétence ajoutée !');
         }
 
         $skillId = $this->entityManager->getRepository(LienUserSkill::class)->findBy(["user"=>$idUser]);
@@ -219,7 +204,10 @@ class HomeController extends AbstractController
             'listSkill' => $listSkill,
             'listCategory'=> $listCategory,
             'user'=>$user,
-            'idUser'=>$idUser
+            'idUser'=>$idUser,
+            'oneProfil'=>$user,
+            'idProfil'=> $prof,
+            'diplayDispo'=>$diplayDispo
         ]);
     }
 
@@ -239,7 +227,7 @@ class HomeController extends AbstractController
             $userModified = $this->entityManager->getRepository(User::class)->findOneBy(["id"=>$idUserModified]);
             $userModified->updateTimestanps();
             $this->entityManager->flush();
-            $this->addFlash('modification', 'Compétence modifiée avec succès');
+            $this->addFlash('info', 'Compétence modifiée !');
             return $this->redirectToRoute('singleProfilSkills', ['idUser'=>$idUser]);
         }
 
@@ -260,7 +248,7 @@ class HomeController extends AbstractController
         $item = $this->getDoctrine()->getManager();
         $item->remove($suppUserSkill);
         $item->flush();
-        $this->addFlash('suppression', 'Suppression dela compétence effectuée avec succès');
+        $this->addFlash('alert', 'Compétence supprimée !');
 
         return $this->redirectToRoute('singleProfilSkills', ['idUser'=>$idUser]);
     }

@@ -2,29 +2,44 @@
 
 {% block body %}
 
+    {% set diplayResult = false %}
+
     {% if skillSearched is defined %}
 
-        <h1>Résultat de la recherche pour la compétence "{{skillSearched.nom.nom }}" </h1>
-        {% for el in LienUserSkill %}
-            {% if skillSearched.nom.id == el.skill.id %}
-                {% for user in listUser %}
-                    {%  if user.id == el.user.id %}
-                        <li><a href ={{  path('singleProfil', {idProfil:user.profil.id, idUser:user.id}) }}>{{ user.nom | upper }} {{ user.prenom }}</a></li>
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
-        {% endfor %}
+        <h1>Résultat de la recherche pour la compétence "{{skillSearched.nom.nom }}"</h1>
 
-        <a href={{ path('searchBySkill') }}>Lancer une nouvelle recherche</a>
+        <div class="my-5">
+            {% for el in LienUserSkill %}
+                {% if skillSearched.nom.id == el.skill.id %}
+                    {% for user in listUser %}
+                        {%  if user.id == el.user.id %}
+                            <div class="py-3 border-bottom"><a href ={{ path('singleProfilMissions', {idProfil:user.profil.id, idUser:user.id}) }}>{{ user.nom | upper }} {{ user.prenom }}</a></div>
+                            {%  set  diplayResult = true %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+            {% if diplayResult == false %}
+                <div class="py-5 border-bottom border-top">Aucune Correspondance ! </div>
+            {% endif %}
+        </div>
+
+        <a href={{ path('searchBySkill') }}>
+            <button class="d-flex ms-auto me-auto btn btn-primary mb-3">Lancer une nouvelle recherche</button>
+        </a>
 
     {% else %}
 
-        <h1>Recherche avancée par COMPETENCE</h1>
-        {{ form_start(formSearchByKill) }}
-        {{ form_row(formSearchByKill.nom) }}
-        <button>Afficher</button>
-        {{ form_end(formSearchByKill) }}
+        <h1>Recherche une compétence :</h1>
+
+        <div class="border-top border-bottom my-5">
+            {{ form_start(formSearchByKill) }}
+            <div class="d-flex justify-content-center py-5">
+                <div class="w-50">{{ form_row(formSearchByKill.nom) }}</div>
+                <div><button class="btn btn-primary">Afficher</button></div>
+            </div>
+            {{ form_end(formSearchByKill) }}
+        </div>
 
     {% endif %}
-
 {% endblock %}

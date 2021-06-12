@@ -3,7 +3,7 @@
 {% block body %}
 
 {%  for user in allCandidate %}
-    <li><a href ={{ path('singleProfil', {idProfil:user.profil.id, idUser:user.id}) }}>{{ user.nom | upper }} {{ user.prenom }}</a></li>
+    <div  class="py-3 border-bottom"><a href ={{ path('singleProfilMissions', {idProfil:user.profil.id, idUser:user.id}) }}>{{ user.nom | upper }} {{ user.prenom }}</a></div>
 {% endfor %}
 
 {% endblock %}

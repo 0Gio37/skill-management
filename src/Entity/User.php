@@ -97,10 +97,16 @@ class User implements UserInterface
      */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Archives::class, mappedBy="user", orphanRemoval=true, cascade={"persist"})
+     */
+    private $archives;
+
     public function __construct()
     {
         $this->mission = new ArrayCollection();
         $this->lienUserSkills = new ArrayCollection();
+        $this->archives = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -377,6 +383,36 @@ class User implements UserInterface
             $this->setCreatedAt(new \DateTimeImmutable());
         }
         $this->setUpdatedAt(new \DateTimeImmutable());
+    }
+
+    /**
+     * @return Collection|Archives[]
+     */
+    public function getArchives(): Collection
+    {
+        return $this->archives;
+    }
+
+    public function addArchive(Archives $archive): self
+    {
+        if (!$this->archives->contains($archive)) {
+            $this->archives[] = $archive;
+            $archive->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArchive(Archives $archive): self
+    {
+        if ($this->archives->removeElement($archive)) {
+            // set the owning side to null (unless already changed)
+            if ($archive->getUser() === $this) {
+                $archive->setUser(null);
+            }
+        }
+
+        return $this;
     }
 
 }

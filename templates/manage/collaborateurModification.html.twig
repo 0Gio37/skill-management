@@ -11,37 +11,45 @@
         <h1>MODIFIER VOS DONNÉES PERSONNELLES</h1>
     {% endif %}
 
-    <div>
+    <div class="border-top border-bottom mt-5 mb-5">
         {{ form_start(modifCollaborateurForm) }}
-        <div>
-            {{ form_row(modifCollaborateurForm.nom) }}
-            {{ form_row(modifCollaborateurForm.prenom) }}
-            {% if is_granted('ROLE_ADMIN') %}
-                {{ form_row(modifCollaborateurForm.email) }}
-                {{ form_row(modifCollaborateurForm.password) }}
-            {% endif %}
+        <div class="mt-3 mb-3 d-flex">
+            <label class="w-100">Nom{{ form_row(modifCollaborateurForm.nom) }}</label>
+            <label class="w-100">Prenom{{ form_row(modifCollaborateurForm.prenom) }}</label>
+            <label class="w-100">Téléphone{{ form_row(modifCollaborateurForm.telephone) }}</label>
         </div>
-        <div>
-            {{ form_row(modifCollaborateurForm.adresse) }}
-            {{ form_row(modifCollaborateurForm.cp) }}
-            {{ form_row(modifCollaborateurForm.ville) }}
-            {{ form_row(modifCollaborateurForm.telephone) }}
+        <div class="mt-3 mb-3 d-flex">
+            <label class="w-100">Adresse {{ form_row(modifCollaborateurForm.adresse) }}</label>
+            <label class="w-100">Code Postal {{ form_row(modifCollaborateurForm.cp) }}</label>
+            <label class="w-100">Ville{{ form_row(modifCollaborateurForm.ville) }}</label>
         </div>
         {% if is_granted('ROLE_ADMIN') %}
-            <div>
-                {{ form_row(modifCollaborateurForm.etat) }}
-                {{ form_row(modifCollaborateurForm.profil) }}
-                {{ form_row(modifCollaborateurForm.roles) }}
+            <div class="mt-3 mb-3 d-flex">
+                <label class="w-100">Etat{{ form_row(modifCollaborateurForm.etat) }}</label>
+                <label class="w-100">Profil{{ form_row(modifCollaborateurForm.profil) }}</label>
+                <label class="w-100">{{ form_row(modifCollaborateurForm.roles) }}</label>
             </div>
         {% endif %}
-        <button>Modifier</button>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="mt-3 mb-3 d-flex justify-content-center">
+                <label class="text-center w-50">Email {{ form_row(modifCollaborateurForm.email) }}</label>
+            </div>
+        {% endif %}
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="mt-3 mb-3">
+                <label class="d-flex justify-content-center w-100">{{ form_row(modifCollaborateurForm.password) }}</label>
+            </div>
+        {% endif %}
+        <button class="d-flex ms-auto btn btn-primary btn-sm mb-3">Modifier</button>
         {{ form_end(modifCollaborateurForm) }}
     </div>
-
     {% if is_granted('ROLE_ADMIN') %}
-        <a href= {{ path('manageCollaborateur')  }}><button>Annuler</button></a>
+        <a class="text-decoration-none" href= {{ path('manageCollaborateur')  }}>
+            <button class="btn-sm btn btn-secondary">Annuler</button>
+        </a>
     {% else %}
-        <a href ={{  path('singleProfil', {idProfil:currentIdProfil, idUser:currentId}) }}><button>Annuler</button></a>
+        <a class="text-decoration-none" href= {{ path('singleProfilMissions', {idProfil:currentIdProfil, idUser:currentId})  }}>
+            <button class="btn-sm btn btn-secondary">Annuler</button>
+        </a>
     {% endif %}
-
 {% endblock %}

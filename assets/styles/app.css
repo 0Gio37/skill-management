@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import "../../node_modules/bootstrap";
+
+.alert{
+    text-align: center;
+    color: white;
+    font-style: italic;
+    border: none;
+    margin: 0;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+.alert-success{
+    background-color: green;
+}
+
+.alert-info{
+    background-color: deepskyblue;
+}
+
+.alert-alert{
+    background-color: red;
+}
+
+.navbar{
+    padding-right: 2%;
+    padding-left: 2%;
+}
+
+.main{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-column-gap: 2%;
+    padding-right: 2%;
+    padding-left: 2%;
+}
+
+.aside-bar-div{
+    position: sticky;
+    top: 20px;
+}
+section{
+    min-height: 100vh;
+}
+
+.footer{
+    height: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -147,7 +147,7 @@ class SearchController extends AbstractController
     public function allCollaborateursList(Request $request)
     {
         $allCollaborateurs = $this->entityManager->getRepository(User::class)->findBy(
-            ['profil'=> 2]);
+            ['profil'=> 2], ["nom" => "ASC"], null);
 
             return $this->render('search/allCollaborateursList.html.twig', [
                 'allCollaborateurs' => $allCollaborateurs
@@ -160,7 +160,7 @@ class SearchController extends AbstractController
     public function allCandidateList(Request $request)
     {
         $allCandidate = $this->entityManager->getRepository(User::class)->findBy(
-            ['profil'=> 1]);
+            ['profil'=> 1], ["nom" => "ASC"], null);
 
         return $this->render('search/allCandidateList.html.twig', [
             'allCandidate' => $allCandidate

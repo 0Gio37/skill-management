@@ -8,11 +8,20 @@
 
     <h2>Renseigner la nouvelle valeur</h2>
 
-    {{ form_start(modifCatForm) }}
-    {{ form_row(modifCatForm.nom) }}
-    <button>Modifier</button>
+    <div class="border-top border-bottom my-5">
+        {{ form_start(modifCatForm) }}
+        <div class="d-flex justify-content-evenly py-5">
+            <div>{{ form_row(modifCatForm.nom) }}</div>
+            <div><button class="btn btn-primary">Modifier</button></div>
+        </div>
     {{ form_end(modifCatForm) }}
+    </div>
 
-    <a href= {{ path('manageCategory')  }}><button>Annuler</button></a>
+    <a class="text-decoration-none" href= {{  path('manageCategory')  }}>
+        <button class="btn-sm btn btn-secondary">Annuler</button>
+    </a>
 
 {% endblock %}
+
+
+

@@ -3,33 +3,65 @@
 {% block title %}Main Page : Dashbord{% endblock %}
 
 {% block body %}
+    <h1 class="mb-5">TABLEAU DE BORD</h1>
 
-    <div>
-        <h1>TABLEAU DE BORD</h1>
-        <div>
-            <h2>Sur le mois de {{ "now" | date("M") | format_date(locale='fr', pattern="MMMM YYYY") }}</h2>
-            <div>
-                <p>{{ sumNewCollabCurrentMonth }}</p>
-                <p>Nouveaux Collaborateurs</p>
+    <h2 class="text-center mb-5"> {{ "now" | date("M") | format_date(locale='fr', pattern="MMMM YYYY") | upper }} </h2>
+
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col dropdown bg-warning mx-3 border pb-2 shadow rounded">
+                <p class="text-center fs-3 fw-bold">{{ sumNewCollabCurrentMonth }}</p>
+                <button class="d-flex ms-auto me-auto btn btn-primary dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    Nouveaux Collaborateurs
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    {% for user in tbCollabCurrentMonth %}
+                        <li><a class="dropdown-item" href ={{  path('singleProfilMissions', {idProfil:user.profil.id, idUser:user.id}) }}>{{ user.prenom }} {{ user.nom | upper }}</a></li>
+                    {% endfor %}
+                </ul>
             </div>
-            <div>
-                <p>{{ sumTbCollabModification }}</p>
-                <p>Collaborateurs modifiés</p>
-                <p><a href={{ path('showCollabModif') }}>Voir les collaborateurs</a></p>
+            <div class="col dropdown bg-warning mx-3 border pb-2 shadow rounded">
+                <p class="text-center fs-3 fw-bold">{{ sumTbCollabModification }}</p>
+                    <button class="d-flex ms-auto me-auto btn btn-primary dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        Collaborateurs modifiés
+                    </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                {% for user in tbCollabModification %}
+                    <li><a class="dropdown-item" href ={{  path('singleProfilMissions', {idProfil:user.profil.id, idUser:user.id}) }}>{{ user.prenom }} {{ user.nom | upper }}</a></li>
+                {% endfor %}
+                </ul>
             </div>
-            <div>
-                <p>{{ sumNewCandidCurrentMonth }}</p>
-                <p>Nouveaux Candidats</p>
+            <div class="col dropdown bg-warning mx-3 border pb-2 shadow rounded">
+                <p class="text-center fs-3 fw-bold">{{ sumNewCandidCurrentMonth }}</p>
+                <button class="d-flex ms-auto me-auto btn btn-primary dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    Nouveaux Candidats
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    {% for user in tbCandidCurrentMonth %}
+                        <li><a class="dropdown-item" href ={{  path('singleProfilMissions', {idProfil:user.profil.id, idUser:user.id}) }}>{{ user.prenom }} {{ user.nom | upper }}</a></li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
-
-        <h2>Les derniers inscrits</h2>
-        <ul>
-            {% for user in lastUsers %}
-                <li><a href ={{  path('singleProfil', {idProfil:user.profil.id, idUser:user.id}) }}>{{ user.prenom }} {{ user.nom | upper }}</a></li>
-                <li>Crée le : {{ user.createdAt | date('d M Y') | format_date(locale='fr') }} à  {{ user.createdAt | date('H:i:s') }}</li>
-                <li>Profil :  {{ user.profil.nom }}</li>
-            {% endfor %}
-        </ul>
     </div>
+
+    <h2  class="text-center mb-5">DERNIERS INSCRITS</h2>
+
+    <div class="row">
+        {% for user in lastUsers %}
+        <div class="col-sm-3">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="text-center">{{ user.nom | upper }} {{ user.prenom }} </h5>
+                    <p>Le {{ user.createdAt | date('d M Y') | format_date(locale='fr') }} à {{ user.createdAt | date('H:i') }}</p>
+                    <h6>"{{ user.profil.nom }}"</h6>
+                    <div class="d-flex justify-content-sm-end">
+                        <a class="btn btn-primary" href ={{  path('singleProfilMissions', {idProfil:user.profil.id, idUser:user.id}) }}>Voir la fiche</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
 {% endblock %}

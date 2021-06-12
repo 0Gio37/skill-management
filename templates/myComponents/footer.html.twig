@@ -1,16 +1,23 @@
-<div>
-    {% if app.user %}
-        <div class="mb-3">
-            Connecté en tant que {{ app.user.nom }} {{ app.user.prenom }}
+{%  if app.user.roles[0] is same as "ROLE_ADMIN" %}
+    <div>
+        COMPTE ADMINISTRATEUR
+    </div>
+    {% elseif app.user.roles[0] is same as "ROLE_STRUCTURE" %}
+        <div>
+            COMPTE STRUCTURE
         </div>
-        {%  if app.user.roles[0] is same as "ROLE_ADMIN" %}
-            <div>
-                COMPTE ADMINISTRATEUR
-            </div>
-            {% else %}
-                <div>
-                    COMPTE UTILISATEUR
-                </div>
-        {% endif %}
-    {% endif %}
+    {% else %}
+        <div>
+            COMPTE UTILISATEUR
+        </div>
+{% endif %}
+
+<div>
+    {{ "now"| format_date(locale='fr',pattern="EEEE dd MMMM YYYY") }}
 </div>
+
+{% if app.user %}
+    <div class="mb-3">
+        Connecté en tant que {{ app.user.nom }} {{ app.user.prenom }}
+    </div>
+{% endif %}

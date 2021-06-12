@@ -37,10 +37,11 @@ class ManageUserController extends AbstractController
             $this->entityManager->persist($data);
             $this->entityManager->flush();
 
-            $this->addFlash('creation', 'Le candidat "' . $data->getNom().' '. $data->getPrenom(). '" a bien été créé !');
+            $this->addFlash('success', 'Candidat "' . $data->getNom().' '. $data->getPrenom(). '" créé !');
         }
 
-        $candidateList= $this->entityManager->getRepository(User::class)->findAll();
+        $candidateList= $this->entityManager->getRepository(User::class)->findBy(
+                [], ["nom" => "ASC"], null);
 
         return $this->render('manage/candidate.html.twig',[
             'candidateList'=>$candidateList,
@@ -61,11 +62,11 @@ class ManageUserController extends AbstractController
         {
             $modifCandidate->setPassword($passwordEncoder->encodePassword($modifCandidate, $modifCandidate->getPassword()));
             $this->entityManager->flush();
-            $this->addFlash('modification', 'Le candidat a bien été modifié !');
+            $this->addFlash('info',  'Profil modifié !');
             if($modifCandidate->getRoles() === "ROLE_ADMIN" ){
                 return $this->redirectToRoute('manageCandidate');
             } else{
-                return $this->redirectToRoute('singleProfil', ['idUser'=>$idUser, 'idProfil'=>$idProfil]);
+                return $this->redirectToRoute('singleProfilMissions', ['idUser'=>$idUser, 'idProfil'=>$idProfil]);
             }
         }
 
@@ -86,7 +87,7 @@ class ManageUserController extends AbstractController
         $item = $this->getDoctrine()->getManager();
         $item->remove($suppCandidate);
         $item->flush();
-        $this->addFlash('suppression', 'Le candidat "' . $suppCandidate->getNom().' '.$suppCandidate->getPrenom().'" a bien été supprimé !');
+        $this->addFlash('alert', 'Candidat "' . $suppCandidate->getNom().' '.$suppCandidate->getPrenom().'" supprimé !');
 
         return $this->redirectToRoute('manageCandidate');
     }
@@ -107,10 +108,11 @@ class ManageUserController extends AbstractController
             $collaborateur->setPassword($passwordEncoder->encodePassword($collaborateur, $collaborateur->getPassword()));
             $this->entityManager->persist($data);
             $this->entityManager->flush();
-            $this->addFlash('creation', 'Le collaborateur "' . $data->getNom().' '. $data->getPrenom(). '" a bien été créé !');
+            $this->addFlash('succes', 'Collaborateur "' . $data->getNom().' '. $data->getPrenom(). '" créé !');
         }
 
-        $collaborateurList= $this->entityManager->getRepository(User::class)->findAll();
+        $collaborateurList= $this->entityManager->getRepository(User::class)->findBy(
+            [], ["nom" => "ASC"], null);
 
         return $this->render('manage/collaborateur.html.twig',[
             'collaborateurList'=>$collaborateurList,
@@ -131,12 +133,12 @@ class ManageUserController extends AbstractController
         {
             $modifCollaborateur->setPassword($passwordEncoder->encodePassword($modifCollaborateur, $modifCollaborateur->getPassword()));
             $this->entityManager->flush();
-            $this->addFlash('modification', 'Le collaborateur a bien été modifié !');
+            $this->addFlash('info', 'Profil modifié !');
 
             if($modifCollaborateur->getRoles() === "ROLE_ADMIN" ){
                 return $this->redirectToRoute('manageCollaborateur');
             } else{
-                return $this->redirectToRoute('singleProfil', ['idUser'=>$idUser, 'idProfil'=>$idProfil]);
+                return $this->redirectToRoute('singleProfilMissions', ['idUser'=>$idUser, 'idProfil'=>$idProfil]);
             }
         }
 
@@ -157,7 +159,7 @@ class ManageUserController extends AbstractController
         $item = $this->getDoctrine()->getManager();
         $item->remove($suppCollaborateur);
         $item->flush();
-        $this->addFlash('suppression', 'Le collaborateur "' . $suppCollaborateur->getNom().' '.$suppCollaborateur->getPrenom().'" a bien été supprimé !');
+        $this->addFlash('alert', 'Collaborateur "' . $suppCollaborateur->getNom().' '.$suppCollaborateur->getPrenom().'" supprimé !');
 
         return $this->redirectToRoute('manageCollaborateur');
     }

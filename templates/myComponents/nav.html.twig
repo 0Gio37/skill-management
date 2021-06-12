@@ -1,42 +1,43 @@
 {% if (app.user.roles[0] is same as('ROLE_STRUCTURE')) or (app.user.roles[0] is same as('ROLE_ADMIN')) %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href={{ path('home') }}>Tableau de Bord</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href={{ path('searchHome') }} id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Recherches avancées
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href={{ path('searchByName') }}>Par Noms</a></li>
-                            <li><a class="dropdown-item" href={{ path('searchBySkill') }}>Par Compétences</a></li>
-                            <li><a class="dropdown-item" href={{ path('searchBySkillLevel') }}>Par niveaux de Compétences</a></li>
-                            <li><a class="dropdown-item" href={{ path('searchByPrefer') }}>Par Compétences préférées</a></li>
-                            <li><a class="dropdown-item" href={{ path('allCollaborateursList') }}>Lister tous les Collaborateurs</a></li>
-                            <li><a class="dropdown-item" href={{ path('allCandidateList') }}>Lister tous les Candidats</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                {% if app.user %}
-                    <div>
-                        <a class="dropdown-item" href="{{ path('app_logout') }}">SE DECONNECTER</a>
-                    </div>
-                {% endif %}
-            </div>
-        </div>
-    </nav>
-{% else %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+
+                <div class="d-flex">
+
+                <a class="navbar-brand text-warning" href={{ path('home') }}>Tableau de Bord</a>
+                <div class="ps-5 " id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-warning ps" href={{ path('searchHome') }} id="navbarDropdownMenuLink"  data-bs-toggle="dropdown">
+                                Recherches avancées
+                            </a>
+                            <ul class="dropdown-menu text-warning" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item text-secondary" href={{ path('searchByName') }}>Par Noms</a></li>
+                                <li><a class="dropdown-item text-secondary" href={{ path('searchBySkill') }}>Par Compétences</a></li>
+                                <li><a class="dropdown-item text-secondary" href={{ path('searchBySkillLevel') }}>Par niveaux de Compétences</a></li>
+                                <li><a class="dropdown-item text-secondary" href={{ path('searchByPrefer') }}>Par Compétences préférées</a></li>
+                                <li><a class="dropdown-item text-secondary" href={{ path('allCollaborateursList') }}>Lister tous les Collaborateurs</a></li>
+                                <li><a class="dropdown-item text-secondary" href={{ path('allCandidateList') }}>Lister tous les Candidats</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                </div>
+
             {% if app.user %}
                 <div>
-                    <a class="dropdown-item" href="{{ path('app_logout') }}">SE DECONNECTER</a>
+                    <a class="dropdown-item text-danger" href="{{ path('app_logout') }}">DECONNEXION</a>
                 </div>
             {% endif %}
         </div>
+    </nav>
+{% else %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark d-flex justify-content-end">
+            {% if app.user %}
+                <div>
+                    <a class="dropdown-item text-danger" href="{{ path('app_logout') }}">DECONNEXION</a>
+                </div>
+            {% endif %}
     </nav>
 {% endif %}

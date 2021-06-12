@@ -6,27 +6,38 @@
 
     <h1>GESTION DES COMPETENCES</h1>
 
-    <div>
-        {{ form_start(formNewSkill) }}
-        {{ form_row(formNewSkill.nom) }}
-        {{ form_row(formNewSkill.category) }}
-        <button>Ajouter une compétence</button>
+    <div class="border-top border-bottom mt-5">
+       {{ form_start(formNewSkill) }}
+        <div class="d-flex justify-content-evenly py-5">
+            <div>{{ form_row(formNewSkill.nom) }}</div>
+            <div>{{ form_row(formNewSkill.category) }}</div>
+            <div><button class="d-flex ms-auto btn btn-primary btn-sm mb-3">Ajouter une Compétence</button></div>
+        </div>
         {{ form_end(formNewSkill) }}
     </div>
 
-    <h2>Liste des compétences</h2>
     {%  for cat in categoryList %}
-        <p>{{ cat.nom | upper }}</p>
+        <h5 class="mt-5">{{ cat.nom | upper }}</h5>
             {% for sk in skillList %}
                 {%  if cat.nom is same as(sk.category.nom) %}
-                    <ul>
-                        <li>{{ sk.nom }}</li>
-                        <li><a href= {{ path('modifSkill', {idUser : sk.id})  }}>Modifier</a></li>
-                        <li><a href= {{ path('suppSkill', {idUser : sk.id})  }}>Supprimer</a></li>
-                    </ul>
+                    <div class="container border-bottom py-3 px-5">
+                        <div class="row">
+                            <div class="col-9">
+                                {{ sk.nom }}
+                            </div>
+                            <div class="col text-start">
+                                <a class="text-decoration-none" href= {{ path('modifSkill', {idUser : sk.id})   }}>
+                                    <button class="d-flex me-auto btn-sm btn btn-outline-primary">Modifier</button>
+                                </a>
+                            </div>
+                            <div class="col text-center">
+                                <button class="d-flex ms-auto btn btn-sm">
+                                    <a class="text-danger" href= {{ path('suppSkill', {idUser : sk.id})  }}>Supprimer</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 {% endif %}
             {% endfor %}
     {% endfor %}
-
-
 {% endblock %}

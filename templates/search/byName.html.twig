@@ -6,34 +6,37 @@
 
     {% if nameSearched is defined %}
 
-        <h1>Résultat de la recherche pour "{{nameSearched.nom }}" </h1>
-        {% for user in listUser %}
-            {% if nameSearched.nom | upper == user.nom | upper %}
-            <li><a href ={{ path('singleProfil', {idProfil:user.profil.id, idUser:user.id}) }}>{{ user.nom | upper }} {{ user.prenom }}</a></li>
-                {%  set  diplayResult = true %}
-            {%  else %}
+        <h1>Résultat pour "{{nameSearched.nom }}" </h1>
+
+        <div class="border-top border-bottom my-5">
+            {% for user in listUser %}
+                {% if nameSearched.nom | upper == user.nom | upper %}
+                <div class="py-4"><a href ={{ path('singleProfilMissions', {idProfil:user.profil.id, idUser:user.id}) }}>{{ user.nom | upper }} {{ user.prenom }}</a></div>
+                    {%  set  diplayResult = true %}
+                {%  else %}
+                {% endif %}
+            {% endfor %}
+            {% if diplayResult == false %}
+                <div class="py-5 border-bottom border-top">Aucune Correspondance ! </div>
             {% endif %}
-        {% endfor %}
-        {% if diplayResult == false %}
-            <p>Aucune Correspondance ! </p>
-        {% endif %}
+        </div>
 
-        <a href={{ path('searchByName') }}>Lancer une nouvelle recherche</a>
-
+        <a href={{ path('searchByName') }}>
+            <button class="d-flex ms-auto me-auto btn btn-primary mb-3">Lancer une nouvelle recherche</button>
+        </a>
 
     {% else %}
 
-        <h1>Recherche avancée par NOM</h1>
+        <h1>Rechercher un nom : </h1>
 
-        {{ form_start(formSearchByName) }}
-        {{ form_row(formSearchByName.nom) }}
-        <button>Afficher</button>
-        {{ form_end(formSearchByName) }}
+        <div class="border-top border-bottom my-5">
+            {{ form_start(formSearchByName) }}
+            <div class="d-flex justify-content-center py-5">
+                <div class="w-50"> {{ form_row(formSearchByName.nom) }}</div>
+                <div><button class="btn btn-primary">Afficher</button></div>
+            </div>
+            {{ form_end(formSearchByName) }}
+        </div>
 
     {% endif %}
-
-
-
-
-
 {% endblock %}

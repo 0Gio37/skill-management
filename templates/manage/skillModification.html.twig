@@ -8,12 +8,18 @@
 
     <h2>Renseigner la ou les nouvelles valeurs</h2>
 
-    {{ form_start(modifSkillForm) }}
-    {{ form_row(modifSkillForm.nom) }}
-    {{ form_row(modifSkillForm.category) }}
-    <button>Modifier</button>
-    {{ form_end(modifSkillForm) }}
+    <div class="border-top border-bottom my-5">
+        {{ form_start(modifSkillForm) }}
+        <div class="d-flex justify-content-evenly py-5">
+            <div>{{ form_row(modifSkillForm.nom) }}</div>
+            <div>{{ form_row(modifSkillForm.category) }}</div>
+            <div><button class="btn btn-primary">Modifier</button></div>
+        </div>
+        {{ form_end(modifSkillForm) }}
+    </div>
 
-    <a href= {{ path('manageSkill')  }}><button>Annuler</button></a>
+    <a class="text-decoration-none" href= {{ path('manageSkill')  }}>
+        <button class="btn-sm btn btn-secondary">Annuler</button>
+    </a>
 
 {% endblock %}

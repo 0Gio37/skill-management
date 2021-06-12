@@ -18,12 +18,18 @@ class SearchBySkillLevelType extends AbstractType
             ->add('niveau', EntityType::class,[
                 'class'=> Expertise::class,
                 'choice_label'=>'niveau',
-                'label'=>false
+                'label'=>'Niveau : ',
+                'attr'=>[
+                    'style' => 'width:50%',
+                ]
             ])
             ->add('nom',EntityType::class, [
                 'class'=>Skill::class,
                 'choice_label'=>'nom',
-                'label'=> false
+                'label'=> 'Compétences',
+                'attr'=>[
+                    'style' => 'width:50%',
+                ]
             ])
         ;
     }

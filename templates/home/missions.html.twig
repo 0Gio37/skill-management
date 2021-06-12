@@ -2,47 +2,66 @@
 
 {% block title %}List Missions{% endblock %}
 
-
 {% block body %}
 
-    <h1>LISTE DES MISSIONS de {{ user.prenom }} {{ user.nom | upper }} </h1>
+    <div class="d-flex">
+        <div class="w-25">
+            {% include 'home/profil.html.twig' %}
+        </div>
+        <div class="ps-5 w-75">
+            <div class="d-flex mb-4">
+                <button class="fw-bolder me-4 bg-light text-primary btn-primary rounded border-end-0 border-start-0 ps-5 pe-5" disabled> Missions </button>
+                <button class="btn-light rounded-top border-0 ps-4 pe-4"><a class="text-primary text-decoration-none"  href ={{  path('singleProfilSkills', {idUser:oneProfil.id,idProfil:idProfil}) }}>Compétences</a></button>
+                <button class="btn-light rounded-top border-0 ps-4 pe-4"><a class="text-primary text-decoration-none"  href ={{  path('newArchive', {idUser:oneProfil.id,idProfil:idProfil}) }}>Documents</a></button>
+            </div>
+            <div class="border-top border-bottom mb-4">
+                {{ form_start(addMissionlUserForm) }}
+                <div class="mt-3 mb-3 d-flex justify-content-between">
+                    <label>Entreprise {{ form_row(addMissionlUserForm.company) }}</label>
+                    {{ form_row(addMissionlUserForm.debut) }}
+                    {{ form_row(addMissionlUserForm.fin) }}
+                    {{ form_row(addMissionlUserForm.en_cours) }}
+                </div>
+                <div class="mt-3 mb-3">
+                    <label class="w-100">Descriptif{{ form_row(addMissionlUserForm.descirptif) }}</label>
+                </div>
+                <button class="d-flex ms-auto btn btn-primary btn-sm mb-3">Ajouter une mission</button>
+                {{ form_end(addMissionlUserForm) }}
+            </div>
 
-    <p><a href={{ path('singleProfil', {idUser: user.id,idProfil:user.profil.id}) }}>Retour au Profil</a></p>
-
-
-    <h2>Ajouter une mission</h2>
-    <div>
-        {{ form_start(addMissionlUserForm) }}
-        {{ form_row(addMissionlUserForm.company) }}
-        {{ form_row(addMissionlUserForm.descirptif) }}
-        {{ form_row(addMissionlUserForm.debut) }}
-        {{ form_row(addMissionlUserForm.fin) }}
-        {{ form_row(addMissionlUserForm.en_cours) }}
-        <button>Ajouter</button>
-        {{ form_end(addMissionlUserForm) }}
+            <h3 class="mb-5">Historique</h3>
+            {% for mission in  missionProfil  %}
+                <h6>{{ mission.debut | format_date(locale='fr', pattern=" dd MMMM YYYY") }} AU {{ mission.fin | format_date(locale='fr', pattern=" dd MMMM YYYY") }}</h6>
+                <div class="row mb-5">
+                    <div class="col-sm-12">
+                        <div class="card mb-2 shadow-sm">
+                            <div class="card-body">
+                        {% for ent in listEntreprise %}
+                            {% if ent.id is same as(mission.company.id) %}
+                                <div class="d-flex justify-content-between border-bottom">
+                                    <p>ENTREPRISE : {{ ent.nom }}</p>
+                                    {% if  mission.encours is same as(true) %}
+                                        <p class="text-danger">Mission en cours</p>
+                                    {% endif %}
+                                    <p>LIEU : {{ ent.lieu }}</p>
+                                </div>
+                            {% endif %}
+                        {% endfor%}
+                        <p class="text-center text-decoration-underline">DETAILS</p>
+                        <p>{{ mission.descirptif }}</p>
+                                <a class="text-decoration-none" href= {{ path('singleProfilMissionModification', {idMission: mission.id, idUser: user.id})   }}>
+                                    <button class="d-flex me-auto btn-sm btn btn-outline-primary">Modifier</button>
+                                </a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <button class="d-flex ms-auto btn btn-sm">
+                                <a class="text-danger" href= {{ path('singleProfilMissionDelete', {idMission : mission.id, idUser: user.id})  }}>Supprimer</a>
+                            </button>
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
-
-    {% for mission in  missionProfil  %}
-    <ul>
-        <li>DU {{ mission.debut | format_date(locale='fr', pattern=" dd MMMM YYYY") }}</li>
-        <li>AU {{ mission.fin | format_date(locale='fr', pattern=" dd MMMM YYYY") }}</li>
-        {% for ent in listEntreprise %}
-            {% if ent.id is same as(mission.company.id) %}
-                <li>ENTREPRISE : {{ ent.nom }}</li>
-                <li>LIEU : {{ ent.lieu }}</li>
-            {% endif %}
-        {% endfor%}
-        <li>MISSION : {{ mission.descirptif }}</li>
-        <li><a href= {{ path('singleProfilMissionModification', {idMission: mission.id, idUser: user.id})  }}>Modifier</a></li>
-        {% if is_granted('ROLE_ADMIN') %}
-            <li><a href= {{ path('singleProfilMissionDelete', {idMission : mission.id, idUser: user.id})  }}>Supprimer</a></li>
-        {% endif %}
-    </ul>
-
-
-    {% endfor %}
-
-
-
-
 {% endblock %}

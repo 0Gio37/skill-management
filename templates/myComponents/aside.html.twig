@@ -1,8 +1,26 @@
-<h3>Panneau d'Administration</h3>
-<ul>
-    <li><a href= {{ path('manageCandidate')  }}>Gestion des candidats</a></li>
-    <li><a href= {{ path('manageCollaborateur')  }}>Gestion des collaborateurs</a></li>
-    <li><a href= {{ path('manageSkill')  }}>Gestion des compétences</a></li>
-    <li><a href= {{ path('manageCategory')  }}>Gestion des catégories</a></li>
-    <li><a href= {{ path('manageCompany')  }}>Gestion des entreprises</a></li>
-</ul>
+<div class="aside-bar-div">
+        {% if is_granted('ROLE_ADMIN') %}
+    <h5 class="bg-warning text-secondary text-center mb-3 shadow rounded">
+        Panneau d'administration
+    </h5>
+        <ul>
+            <li class="mb-2"><a class="text-secondary text-decoration-none" href= {{ path('manageCandidate')  }}>Gestion des candidats</a></li>
+            <li class="mb-2"><a class="text-secondary text-decoration-none" href= {{ path('manageCollaborateur')  }}>Gestion des collaborateurs</a></li>
+            <li class="mb-2"><a class="text-secondary text-decoration-none" href= {{ path('manageSkill')  }}>Gestion des compétences</a></li>
+            <li class="mb-2"><a class="text-secondary text-decoration-none" href= {{ path('manageCategory')  }}>Gestion des catégories</a></li>
+            <li class="mb-2"><a class="text-secondary text-decoration-none" href= {{ path('manageCompany')  }}>Gestion des entreprises</a></li>
+        </ul>
+
+    {% elseif app.user.roles[0] is same as "ROLE_STRUCTURE" %}
+    <div class="bg-warning text-dark text-center mb-3 shadow rounded">
+        Suivi des profils
+    </div>
+
+    {% else %}
+    <div class="bg-warning text-dark text-center mb-3 shadow rounded">
+        Votre espace personnel
+    </div>
+    {% endif %}
+</div>
+
+
