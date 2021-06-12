@@ -38,41 +38,33 @@
                                             <div class="card-body">
                                                 <h6 class="text-center mb-4">{{ comp.nom }}</h6>
                                                 {% if competence.expertise.niveau is same as 'En formation' %}
-                                                    <p>{{ competence.expertise.niveau }} :
+                                                    <div>{{ competence.expertise.niveau }}</div>
                                                         <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
-                                                    </p>
                                                     {% elseif competence.expertise.niveau is same as 'Connaissant les bases' %}
-                                                    <p>{{ competence.expertise.niveau }} :
+                                                        <div>{{ competence.expertise.niveau }}</div>
+                                                        {% for i in 1..2 %}
                                                         <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
-                                                        <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
-                                                    </p>
+                                                        {% endfor %}
                                                     {% elseif competence.expertise.niveau is same as 'Niveau avancé' %}
-                                                        <p>{{ competence.expertise.niveau }} :
-                                                            <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
-                                                            <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
-                                                            <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
-                                                        </p>
+                                                        <div>{{ competence.expertise.niveau }}</div>
+                                                        {% for i in 1..3 %}
+                                                        <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
+                                                        {% endfor %}
                                                     {% elseif competence.expertise.niveau is same as 'Niveau Confirmé' %}
-                                                        <p>{{ competence.expertise.niveau }} :
-                                                            <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
-                                                            <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
-                                                            <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
-                                                            <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
-                                                        </p>
+                                                        <div>{{ competence.expertise.niveau }}</div>
+                                                    {% for i in 1..4 %}
+                                                        <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
+                                                    {% endfor %}
                                                     {% else %}
-                                                        <p>{{ competence.expertise.niveau }} :
-                                                            <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
-                                                            <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
-                                                            <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
-                                                            <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
-                                                            <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
-                                                        </p>
+                                                        <div>{{ competence.expertise.niveau }}</div>
+                                                        {% for i in 1..5 %}
+                                                        <img src= "{{ asset('/img/star.jpeg') }}" width="15px" alt="star image">
+                                                        {% endfor %}
                                                 {% endif %}
-
                                                 {% if competence.prefer == true %}
-                                                    <p>Favorite : Oui</p>
+                                                    <p class="mt-4">Favorite : Oui</p>
                                                 {% else %}
-                                                    <p>Favorite : Non</p>
+                                                    <p class="mt-4">Favorite : Non</p>
                                                 {% endif %}
                                                     <a class="text-decoration-none" href= {{ path('singleProfilSkillModification', {idLienUserSkill : competence.id, idUser: user.id})  }}>
                                                         <button class="d-flex me-auto btn-sm btn btn-outline-primary">Modifier</button>
