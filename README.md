@@ -32,4 +32,5 @@
 
 4/ Table relationnelle :
 
-<img width="1142" alt="Table relationnelle" src="https://user-images.githubusercontent.com/65809101/118299118-a347d580-b4e0-11eb-9904-7a7997973ae9.png">
+<img width="1348" alt="Capture d’écran 2021-06-12 à 15 05 43" src="https://user-images.githubusercontent.com/65809101/121776926-cfae4a80-cb8f-11eb-8bf3-5c604cfd8e98.png">
+
